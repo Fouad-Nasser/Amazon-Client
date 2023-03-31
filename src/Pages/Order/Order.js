@@ -11,6 +11,18 @@ const Order = () => {
             value: "toys and dolls",
         },
         {
+            key: "makup",
+            value: "makeup",
+        },
+        {
+            key: "toys",
+            value: "toys and dolls",
+        },
+        {
+            key: "toys",
+            value: "toys and dolls",
+        },
+        {
             key: "Clothes",
             value: "men clothes",
         },
