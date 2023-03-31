@@ -9,6 +9,8 @@ import SignIn from './Pages/SignIn/SignIn';
 import Account from './Pages/Account/Account';
 import Order from "./Pages/Order/Order";
 
+import ProductDetalis from './Pages/Product_Detalis/product_detalis';
+import Cart from './Pages/Cart/cart';
 
 function App() {
   return (
