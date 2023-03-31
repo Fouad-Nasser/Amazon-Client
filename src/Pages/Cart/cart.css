@@ -1,0 +1,26 @@
+.cart{
+    justify-content: space-evenly;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header h1{
+    width: fit-content;
+    padding: 10px;
+}
+
+.header span{
+    position: relative;
+    top: 50px;
+}
+
+.cart > div{
+    background-color: #FFF;
+}
+
+.total-price{
+
+}

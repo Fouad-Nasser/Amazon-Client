@@ -1,13 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useState } from 'react';
 
 function Quantity(props) {
-    const [num, setNum] = useState(1);
-    const {qty} = props;
+    const {qty, num, handleClick} = props;
     const options = Array(qty);
 
     for (let i = 1; i <= qty; i++) {
-        const item = <Dropdown.Item onClick={()=>{setNum(i)}}>{i}</Dropdown.Item>
+        const item = <Dropdown.Item key={i} onClick={()=>{handleClick(i)}}>{i}</Dropdown.Item>
         options.push(item);
         
     }
@@ -15,7 +13,7 @@ function Quantity(props) {
 
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+      <Dropdown.Toggle variant="light" id="dropdown-basic">
         qty {num}
       </Dropdown.Toggle>
 

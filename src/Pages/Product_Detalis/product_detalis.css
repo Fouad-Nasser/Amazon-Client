@@ -2,11 +2,12 @@
     justify-content: space-around;
 }
 #product_imgs {
-    max-width: 1200px;
+    height: fit-content;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
 }
 .left {
+    width: 100%;
     display: flex;
     gap: 10px;
 }
@@ -31,8 +32,9 @@
 }
 
 .left_2 img {
-    width: 370px;
-    height: 370px;
+    width: 100%;
+    height: auto;
+    min-height: 300px;
 }
 .active {
     border: 2px solid #e77600;

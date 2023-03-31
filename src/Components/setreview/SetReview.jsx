@@ -49,6 +49,7 @@ const SetReview = (props) => {
               .map((_, index) =>
                  (
                     <i
+                        key={index}
                         className={rating >= index + 1 || hoverStar >= index + 1 ?
                           "starBtn bi bi-star-fill"
                           :"starBtn bi bi-star"

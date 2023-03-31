@@ -1,26 +1,33 @@
 import React, { useState, useEffect} from 'react';
+import { useSearchParams } from "react-router-dom";
 import axios from 'axios';
 import './product_detalis.css';
 import Stars from '../../Components/stars';
 import SetReview from '../../Components/setreview/SetReview';
 import Quantity from '../../Components/quantity';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../Store/Actions/cartActions';
 
 function ProductDetalis(props) {
     const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [imgIndx, setImgIndx] = useState(0);
 
+    const [num, setNum] = useState(1);
+    const dispatch = useDispatch()
+
+    const [searchParams] = useSearchParams();
     const productId = '6417574b7505b8e0d7cc74e8';
 
     useEffect(() => { 
-        axios.get(`http://localhost:8000/products/6417574b7505b8e0d7cc74e8`)
+        axios.get(`http://localhost:8000/products/${productId}`)
         .then(res =>{
             const prod = res.data.result;
             console.log(prod);
             setProduct(prod);
         })
 
-        axios.get(`http://localhost:8000/products/6417574b7505b8e0d7cc74e8/reviews`)
+        axios.get(`http://localhost:8000/products/${productId}/reviews`)
         .then(res =>{
             const result = res.data.data;
             console.log(result);
@@ -31,6 +38,19 @@ function ProductDetalis(props) {
 
      const hoverHandler = (indx) => {
         setImgIndx(indx);
+    };
+
+    const addToCartHandler = () => {
+        const prd={
+            productId,
+            name:product.name,
+            image:product.images[0],
+            quantity:num,
+            color:product.color,
+            instock:product.instock,
+            price:product.price
+        }
+        dispatch(addToCart(prd));
     };
 
         return (
@@ -86,9 +106,19 @@ function ProductDetalis(props) {
 
                     <span className='h3 text-success side_data'>in stock</span>
 
-                    <Quantity qty={product?.instock}/>
+                    <Quantity 
+                    num={num}
+                    handleClick={(i)=>{setNum(i)}}
+                    qty={product?.instock}
+                    />
 
-                    <button className='btn btn-warning w-100 my-3'>Add To Cart</button>
+                    <button 
+                    className='btn btn-warning w-100 my-3'
+                    onClick={addToCartHandler}
+                    >
+                        
+                        Add To Cart
+                    </button>
 
                     <div>
                          <span style={{color:'#666'}}>Ships from:</span>
@@ -119,8 +149,8 @@ function ProductDetalis(props) {
                     <h2 className='p-1'>Customers reviews</h2>
                     {
                         reviews?
-                        reviews.map( rev =>(
-                            <div className='my-5'>
+                        reviews.map( (rev,i) =>(
+                            <div key={i} className='my-5'>
                                 <div className='user-data'>
                                     <img src={rev.user.image} alt="" />
                                     <span className='h5 ms-1'>{rev.user.name}</span>
