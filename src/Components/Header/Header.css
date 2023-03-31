@@ -1,0 +1,157 @@
+
+#header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #131921;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  #header__logo {
+    width: 100px;
+    object-fit: contain;
+    margin: 0 20px;
+    margin-top: 18px;
+  }
+  
+  #header__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+    justify-content: center;
+  }
+  
+  #header__searchInput {
+    height: 30px;
+    padding: 10px;
+    border: none;
+    width: 95%;
+  }
+  
+  #header__searchIcon {
+    padding: 5px;
+    cursor: pointer;
+    width: 37px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 30px !important;
+    background-color: #cd9042;
+  }
+  
+  .header__optionLineOne {
+    font-size: 10px;
+  }
+  
+  .header__optionLineTwo {
+    font-size: 13px;
+    font-weight: 800;
+  }
+  
+  #header__optionBasket {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  #header__basketCount {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  #header__nav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .header__option {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+  }
+
+  .nav_bar{
+    background-color: #232f3e;
+  }
+  .header__option:hover , .cart-data:hover{
+    border: 1px solid white !important;
+    border-radius: 3px;
+  }
+
+  #navbarScrollingDropdownHeader{
+    width: 550px;
+    
+}
+
+#headerNewCustomerSpan{
+    display: flex;
+    justify-content: center;
+    font-size: small;
+}
+
+#singinHeader{
+    width: 200px;
+}
+.myButton {
+	box-shadow: 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+    width: 200px;
+    text-align: center;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+#hrSignIn{
+    border: 0;
+    height: 2px;
+    font-size: larger;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.vl {
+    border-left: 0.1px solid rgb(181, 157, 0);
+    
+    height: 300px;
+  }
+
+#ColNav{
+    text-align: left;
+}
+
+#ColNav a{
+    text-decoration: none;
+    color: #333333;
+    
+}
+
+#ColNav a:hover{
+    color: #ffaa22;
+    text-decoration: underline;
+}
+
+.ColNav1{
+    margin-left: 10px;
+}
+
