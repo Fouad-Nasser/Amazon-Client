@@ -21,16 +21,16 @@ const Cart = () => {
     }
 
     return (
-        <div className='row bg-light cart'>
+        <div className='row bg-light cart my-3'>
             <div className="col-8">
-                <div className='header'>
+                <div className='cart-header'>
                     <h1>Shopping Cart</h1>
                     <span>Price</span>
                 </div>
                 <hr />
 
                 {
-                    cartItems&&
+                    cartItems.lenght?
                     cartItems.map((i,index)=>
                         <CartItem 
                         key={index} 
@@ -38,6 +38,7 @@ const Cart = () => {
                         updateTotalPrice={()=>{updateTotalPrice()}}
                         />
                     )
+                    :<p className='h2'>No Items on Cart</p>
                 }
 
                 <hr />

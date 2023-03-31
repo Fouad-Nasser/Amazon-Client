@@ -1,7 +1,6 @@
 import React from 'react'
 import './Footer.css'
 import { NavLink } from 'react-router-dom'
-import { fontSize } from '@mui/system'
 
 function Footer() {
     return (

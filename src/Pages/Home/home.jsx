@@ -5,20 +5,19 @@ import './Home.css'
 import { NavLink } from 'react-router-dom';
 import { Card, Row } from 'react-bootstrap';
 import Slider from './../../Components/Slider/Slider';
-import Footer from '../../Components/Footer/Footer';
 
 function Home() {
     const [category, setCategory] = useState([]);
     const [product, setProduct] = useState([]);
     useEffect(() => {
         Promise.all([
-            axios.get('http://localhost:3001/categorys').then((res) => {
+            axios.get('http://localhost:8000/categorys').then((res) => {
                 console.log(res.data.data);
                 setCategory(res.data.data)
             }).catch((err) => {
                 console.log(err);
             }),
-            axios.get("http://localhost:3001/products").then((res) => {
+            axios.get("http://localhost:8000/products").then((res) => {
                 console.log(res.data.data);
                 setProduct(res.data.data)
             }).catch((err) => {

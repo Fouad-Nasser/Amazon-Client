@@ -19,6 +19,8 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/product/:productId' element={<ProductDetalis />} />
         <Route path='/CreateAccount' element={<CreateAccount />} />
         <Route path='/SignIn' element={<SignIn />} />
         <Route path='/Account' element={<Account />} />

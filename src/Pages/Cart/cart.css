@@ -2,25 +2,21 @@
     justify-content: space-evenly;
 }
 
-.header{
+.cart-header{
     display: flex;
     justify-content: space-between;
 }
 
-.header h1{
+.cart-header h1{
     width: fit-content;
     padding: 10px;
 }
 
-.header span{
+.cart-header span{
     position: relative;
     top: 50px;
 }
 
 .cart > div{
     background-color: #FFF;
-}
-
-.total-price{
-
 }

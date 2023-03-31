@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { useSearchParams } from "react-router-dom";
+import {useParams} from 'react-router-dom'
 import axios from 'axios';
 import './product_detalis.css';
 import Stars from '../../Components/stars';
@@ -16,9 +16,11 @@ function ProductDetalis(props) {
     const [num, setNum] = useState(1);
     const dispatch = useDispatch()
 
-    const [searchParams] = useSearchParams();
-    const productId = '6417574b7505b8e0d7cc74e8';
+    // use this url to show the page
+    // http://localhost:3000/product/6417574b7505b8e0d7cc74e8
+    const {productId} = useParams() //'6417574b7505b8e0d7cc74e8';
 
+    console.log('id',productId);
     useEffect(() => { 
         axios.get(`http://localhost:8000/products/${productId}`)
         .then(res =>{
@@ -33,7 +35,7 @@ function ProductDetalis(props) {
             console.log(result);
             setReviews(result);
         })
-     },[]);
+     },[productId]);
 
 
      const hoverHandler = (indx) => {

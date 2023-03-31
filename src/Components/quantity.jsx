@@ -1,3 +1,4 @@
+import { width } from '@mui/system';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function Quantity(props) {
@@ -12,7 +13,7 @@ function Quantity(props) {
 
 
   return (
-    <Dropdown>
+    <Dropdown style={{width:'fit-content'}}>
       <Dropdown.Toggle variant="light" id="dropdown-basic">
         qty {num}
       </Dropdown.Toggle>

@@ -1,0 +1,18 @@
+.sign{
+    width: 30vw;
+    border: 1px solid grey ;
+    border-radius: 20px;
+    padding: 2%;
+    margin-top: 20px;
+  }
+  
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #input:focus{
+    border: solid 1px rgb(255, 128, 0);
+    box-shadow:outset 0 0 3px 3px rgb(255, 128, 0);
+  
+  }
