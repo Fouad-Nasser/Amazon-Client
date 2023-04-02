@@ -1,19 +1,28 @@
-#imgCardSellMore{
-    width: 40px;
-    height: auto;
+#imgCardSellMore {
+  width: 70px;
+  height: auto;
+  margin-left: -1px;
 }
 
-#CardSellMoreTitleCard, #CardSellMoreTitleCardp{
-    text-align: left;
+#CardSellMoreTitleCard {
+  /* text-align: left; */
+  margin-top: 30px;
+  font-weight: bolder;
+  font-size: 37px;
 }
-#cardBody{
-    height: 150px;
-   
+#CardSellMoreTitleCardp {
+  margin-top: 30px;
+}
+#cardBody {
+  height: 70vh;
+  border-radius: 10px;
+  background-color: rgb(236, 236, 236);
+  padding: 5vh;
 }
 
-/* #cardBodyAll{
-    margin: 5px;
-} */
+#cardBodyAll{
+    margin: 10px;
+}
 
 /* #cardBodyAll:hover{
     cursor: pointer;
