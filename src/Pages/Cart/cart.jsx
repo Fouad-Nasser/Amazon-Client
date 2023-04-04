@@ -30,7 +30,7 @@ const Cart = () => {
                 <hr />
 
                 {
-                    cartItems.lenght?
+                    cartItems.length?
                     cartItems.map((i,index)=>
                         <CartItem 
                         key={index} 
