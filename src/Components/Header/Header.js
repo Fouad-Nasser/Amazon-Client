@@ -28,13 +28,13 @@ class Header extends React.Component {
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Nav.Link href="#action1">HomeTest</Nav.Link>
+                                <Nav.Link href="#action1">Home</Nav.Link>
                                 <NavDropdown title={`Hello SingIn`} id="navbarScrollingDropdown">
                                     <div id='navbarScrollingDropdownHeader'>
                                         <div className='row'>
                                             <Row>
                                                 <Col></Col>
-                                                <Col><Link to="/SignIn"><a href="#" class="myButton">SignIn</a></Link></Col>
+                                                <Col><Link to="/SignIn"><a href="#" class="myButton">SignIn Test</a></Link></Col>
                                                 <Col></Col>
                                             </Row>
                                             <div className='row' id='headerNewCustomer'>
