@@ -6,7 +6,12 @@ import CartItem from '../../Components/cartItem';
 
 const Cart = () => {
     const {cartItems} = useSelector(state => state.cart);
-    const [TotalPrice, setTotalPrice] = useState(calcTotalPrice())
+    const [TotalPrice, setTotalPrice] = useState(calcTotalPrice());
+    
+    
+    useEffect(()=>{
+        setTotalPrice(calcTotalPrice())
+    },[cartItems]);
 
     function calcTotalPrice() {
         let totalPrice = 0;
