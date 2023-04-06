@@ -24,7 +24,7 @@ function ProductDetalis(props) {
     useEffect(() => { 
         axios.get(`http://localhost:8000/products/${productId}`)
         .then(res =>{
-            const prod = res.data.result;
+            const prod = res.data.data;
             console.log(prod);
             setProduct(prod);
         })
