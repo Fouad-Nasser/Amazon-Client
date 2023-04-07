@@ -7,9 +7,8 @@ import "./Account.css"
 class Account extends React.Component {
     render() {
         return (
-            <div className='container'>
+            <div className='container' style={{ position: 'inherit' }}>
                 <Row id='RowTitleAccount'><h1>Your Account</h1></Row>
-
                 <div className='row row-cols-3 row-cols-md-3 g-12'>
                     <div className='col'>
                         <Link to={"/Order"} id="LinkAccount">

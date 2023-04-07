@@ -4,48 +4,28 @@ import Carousel from 'react-bootstrap/Carousel';
 import './Home.css'
 import { NavLink } from 'react-router-dom';
 import { Card, Row } from 'react-bootstrap';
-import Slider from './../../Components/Slider/Slider';
-import Footer from '../../Components/Footer/Footer';
+import Slider from '../../Components/Slider/SliderCategory';
+import CardData from '../../Components/CardData/CardData';
+import SliderCategory from '../../Components/Slider/SliderCategory';
+import SliderFooter from '../../Components/Slider/SliderFooter';
 
 function Home() {
     const [category, setCategory] = useState([]);
-    const [product, setProduct] = useState([]);
+    // const [product, setProduct] = useState([]);
     useEffect(() => {
-        Promise.all([
-            axios.get('http://localhost:3001/categorys').then((res) => {
-                console.log(res.data.data);
-                setCategory(res.data.data)
-            }).catch((err) => {
-                console.log(err);
-            }),
-            axios.get("http://localhost:3001/products").then((res) => {
-                console.log(res.data.data);
-                setProduct(res.data.data)
-            }).catch((err) => {
-                console.log(err);
-            })
-        ])
+        axios.get('http://localhost:3000/categorys').then((res) => {
+            console.log(res.data.data);
+            setCategory(res.data.data)
+        }).catch((err) => {
+            console.log(err);
+        })
     }, [])
-    const listRender = category.map((item) => (
-        <div key={item.id}>
-            <Card style={{ width: '22rem' }} className='bg-white text-dark mb-4'>
-                <Card.Body>
-                    <Card.Title>{item.name}</Card.Title>
-                    <NavLink>
-                        <Card.Img variant="top" style={{ width: '20rem', height: '17rem' }} src={item.image} />
-                    </NavLink>
-                    <NavLink className='mt-1 text-decoration-none '>
-                        <span className='text-left see_More '>See more</span>
-                    </NavLink>
-                </Card.Body>
-            </Card>
-        </div>
-    ))
     return (
         <div>
             <div className='home backgroundData' style={{ overflow: 'hidden', clear: 'both' }}>
-                <div className="home__container">
-                    <Carousel slide={true}>
+                {/* Carousel Part */}
+                <div className="home__container row">
+                    <Carousel slide={true} className='col-12'>
                         <Carousel.Item interval={1000}>
                             <img
                                 className="d-block w-100 home__image"
@@ -96,14 +76,16 @@ function Home() {
                         </Carousel.Item>
                     </Carousel>
                 </div>
-                <div className='home-content'>
-                    <div className="home__row">
-                        <Row xs={1} md={4} className='m-4'>
-                            {listRender}
-                        </Row>
-                    </div>
+                {/* Category Part 1 */}
+                <div className="home__row">
+                    <Row xs={3} md={4} sm={3} className='m-4'>
+                        {category.slice(0, 8).map((item) => (
+                            <CardData item={item} />
+                        ))}
+                    </Row>
                 </div>
-                <div className='container-fluid'>
+                {/*Slider Part 1*/}
+                <div className='container-fluid mb-3'>
                     <div className='row'>
                         <div className='col-12'>
                             <div style={{ width: '91rem', marginLeft: '18px' }}>
@@ -113,30 +95,79 @@ function Home() {
                                             Large Appliances
                                             <span className='m-3 see_More'>See more</span>
                                         </Card.Title>
-                                        <Slider slides={product} />
+                                        {/* Kitchen essentials Category */}
+                                        <SliderCategory categoryID='64233ff9213d64eea40879d3' flag={false} />
                                     </Card.Body>
                                 </Card>
                             </div>
                         </div>
                     </div>
-                    {/* Part SignUp */}
-                    <div className='row bg-white mt-5'>
-                        <hr className='mt-5' />
+                </div>
+                {/* Category Part 2 */}
+                <div>
+                    <Row xs={3} md={4} sm={3} className='m-4' >
+                        {category.slice(8, 12).map((item) => (
+                            <CardData item={item} />
+                        ))}
+                    </Row>
+                </div>
+                {/*Slider Part 2*/}
+                <div className='container-fluid mb-3'>
+                    <div className='row'>
                         <div className='col-12'>
-                            <span className='text-footer'>See personalized recommendations</span>
-                            <NavLink to="/SignIn" className="text-decoration-none">
-                                <p className='loginbtn m-2 p-1' width='50px'>Sign in</p>
-                            </NavLink>
-                            <div>
-                                <span className='text-footer'>
-                                    New customer?
-                                    <NavLink to="/SignUp" className='p-2 text-decoration-none see_More'>Start here.</NavLink>
-                                </span>
+                            <div style={{ width: '91rem', marginLeft: '18px' }} >
+                                <Card className='text-dark'>
+                                    <Card.Body>
+                                        <Card.Title className='card_title'>
+                                            Frequently repurchased in Beauty & Personal Care
+                                            <span className='m-3 see_More'>See more</span>
+                                        </Card.Title>
+                                        {/* Beauty Category */}
+                                        <SliderCategory categoryID='642c7a29d5411cb75202c639' flag={false} />
+                                    </Card.Body>
+                                </Card>
                             </div>
-                            <hr className='mt-4' />
                         </div>
                     </div>
-                    {/* btn Back to top */}
+                </div>
+                {/*Slider Part 3*/}
+                <div className='container-fluid'>
+                    <div className='row'>
+                        <div className='col-12'>
+                            <div style={{ width: '91rem', marginLeft: '18px' }} >
+                                <Card className='text-dark'>
+                                    <Card.Body>
+                                        <Card.Title className='card_title'>
+                                            Frequently repurchased in Beauty & Personal Care
+                                            {/* <span className='m-3 see_More'>See more</span> */}
+                                        </Card.Title>
+                                        {/* Food Product */}
+                                        <SliderCategory categoryID='642dcc3e2ae53d421296f949' flag={false} />
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Part SignUp */}
+                <div className='row bg-white mt-5'>
+                    <hr className='mt-5' />
+                    <SliderCategory categoryID='642c7a29d5411cb75202c639' flag={true} />
+                    {/* <SliderFooter categoryID='642dcc3e2ae53d421296f949'/> */}
+                    <hr className='mt-5' />
+                    <div className='text-center'>
+                        <span className='text-footer'>See personalized recommendations</span>
+                        <NavLink to="/SignIn" className="text-decoration-none">
+                            <p className='loginbtn m-2 p-1' width='50px'>Sign in</p>
+                        </NavLink>
+                        <div>
+                            <span className='text-footer'>
+                                New customer?
+                                <NavLink to="/SignUp" className='p-2 text-decoration-none see_More'>Start here.</NavLink>
+                            </span>
+                        </div>
+                        <hr className='mt-4' />
+                    </div>
                 </div>
             </div>
         </div >
