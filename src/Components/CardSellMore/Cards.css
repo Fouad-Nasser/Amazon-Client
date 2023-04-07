@@ -1,0 +1,21 @@
+#imgCardSellMore{
+    width: 40px;
+    height: auto;
+}
+
+#CardSellMoreTitleCard, #CardSellMoreTitleCardp{
+    text-align: left;
+}
+#cardBody{
+    height: 150px;
+   
+}
+
+/* #cardBodyAll{
+    margin: 5px;
+} */
+
+/* #cardBodyAll:hover{
+    cursor: pointer;
+    background-color: rgba(205, 200, 200, 0.426);
+} */

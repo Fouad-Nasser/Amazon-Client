@@ -1,0 +1,33 @@
+.TopPage {
+  padding-top: 5vh;
+ 
+}
+.Container {
+  padding-left: 15vh;
+  padding-top: 5vh;
+  margin-top: 20px;
+  width: 214vh;
+  background-color: #f3fbfb;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#button{
+  background-color: #f90;
+  border: 2px solid #f90;
+  box-shadow: 0 0 16px rgba(0,0,0,.2);
+  color: #232f3e;
+  font-weight:bolder;
+  border-radius:40px;
+}
+.Container-2 {
+  padding-left: 3vh;
+  padding-top: 5vh;
+  margin-top: 20px;
+  width: 215vh;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
