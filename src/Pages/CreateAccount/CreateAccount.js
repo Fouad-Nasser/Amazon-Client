@@ -76,8 +76,13 @@ const CreateAccount = () => {
 
     return (
         <>
-            <img id="CreateAccountContinueImg2" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
+            <div className="register">
+
+                <img id="CreateAccountContinueImg2" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
+            </div>
+
             <div className="register" >
+
                 <div id="CreateAccount">
                     <form onSubmit={handleSubmit}>
                         <h3 id="CreateAccountContinueTitle">Create account</h3>

@@ -72,8 +72,10 @@ const SignIn = () => {
     const [show, setShow] = useState(false);
     return (
         <>
-            <img id="CreateAccountSignInImg" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
-            <div className="row " >
+            <div className="register">
+
+                <img id="CreateAccountContinueImg2" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
+            </div>            <div className="row " >
                 <div className="SignIn">
                     <div id="SignIn">
                         <form onSubmit={handleSubmit}>
