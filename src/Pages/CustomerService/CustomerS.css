@@ -1,0 +1,58 @@
+* {
+  font-family: "Amazon Ember", Arial, sans-serif;
+  box-sizing: border-box;
+  /* background-color: aliceblue; */
+}
+
+.navbar-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 1000px;
+  height: 60px;
+  font-size: 16px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.25);
+  background: #007185;
+  color: #fff;
+  padding-left: 10vh;
+}
+
+.top-container {
+  background: #007185;
+  color: #fff;
+  padding-top: 10vh;
+  text-decoration: none;
+
+}
+
+.bottom-container {
+    background-color: aliceblue;
+    color:black;
+    /* font-weight: bold; */
+    padding-top: 15vh;
+    
+
+  }
+
+  .body-H {
+margin-left: 10vh;
+background-color: aliceblue;
+
+  }
+  
+  .all-helps{
+    display: flex;
+    margin-top: 8vh;
+    
+  }
+
+
+
+  #tabs{
+    width: 40vh;
+    height: auto;
+   
+    
+  }

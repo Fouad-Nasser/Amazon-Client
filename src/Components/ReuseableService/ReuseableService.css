@@ -1,0 +1,29 @@
+.CardS{
+    height: 15vh;
+    background-color: white;
+    color: black;
+    margin-top: 5vh;
+    margin-right: 2vh;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 5vh;
+    
+   
+}
+
+.C-body{
+   margin: 8px;
+}
+#imgS{
+    width: 60px;
+    height: auto;
+    padding-top: 2vh;
+
+
+    
+}
+.CardS-title{
+    padding-top: 5vh;
+    padding-bottom:5vh ;
+    text-align: left;
+}

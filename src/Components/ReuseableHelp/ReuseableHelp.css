@@ -1,0 +1,28 @@
+.CardH{
+    height: auto;
+    width: 70vh;
+    background-color: white;
+    color: black;
+    margin-top: 4vh;
+    margin-right: 1vh;
+    cursor: pointer;
+    border-radius: 8px;
+   padding: 10px;
+
+}
+
+
+
+.CardH-title{
+   
+    text-align: left;
+    font-weight: lighter;
+
+}
+.CardH-description{
+   
+    text-align: left;
+   font-size: smaller;
+   opacity: .5;
+
+}
