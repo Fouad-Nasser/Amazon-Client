@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './cart.css';
 import { useSelector } from 'react-redux';
 import CartItem from '../../Components/cartItem';
@@ -7,6 +7,10 @@ import CartItem from '../../Components/cartItem';
 const Cart = () => {
     const {cartItems} = useSelector(state => state.cart);
     const [TotalPrice, setTotalPrice] = useState(calcTotalPrice())
+
+    useEffect(()=>{
+        setTotalPrice(calcTotalPrice())
+    },[cartItems])
 
     function calcTotalPrice() {
         let totalPrice = 0;
@@ -30,7 +34,7 @@ const Cart = () => {
                 <hr />
 
                 {
-                    cartItems.lenght?
+                    cartItems.length?
                     cartItems.map((i,index)=>
                         <CartItem 
                         key={index} 

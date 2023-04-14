@@ -26,12 +26,12 @@ const SetReview = (props) => {
     },{
       headers: {
         'content-type': 'application/json',
-        'authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDE2ZDBjMTc5MmI1NTRjZGNmNTQ5NTMiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgwMTMwMzc5LCJleHAiOjE2ODAxNzM1Nzl9.2_DDGAbeNkPChv2NP9edGtBVGL8hjhCLkPA7qYWhjtE'
+        'authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDE2ZDBjMTc5MmI1NTRjZGNmNTQ5NTMiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgwNDgwMjYxLCJleHAiOjE2ODA1MjM0NjF9.nANLgReXhBqYyDHCH8LtKaYxAki1k_31ikL2CVmsPBs'
       }
     })
     .then((response) => {
       console.log(response);
-      setReviews([...reviews,response.data.data]);
+      setReviews([response.data.data, ...reviews]);
 
       inputRef.current.value = '';
       setrating(0)
