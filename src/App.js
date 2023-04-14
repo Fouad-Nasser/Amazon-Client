@@ -11,6 +11,8 @@ import Order from "./Pages/Order/Order";
 
 import ProductDetalis from './Pages/Product_Detalis/product_detalis';
 import Cart from './Pages/Cart/cart';
+import Address from "./Pages/Account/Address/Address";
+import AddAddress from "./Pages/Account/Address/AddAddress/AddAddress";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path='/SignIn' element={<SignIn />} />
         <Route path='/Account' element={<Account />} />
         <Route path='/Order' element={<Order />} />
+        <Route path='/Address' element={<Address />} />
+        <Route path='/AddAddress' element={<AddAddress />} />
         <Route path='*' element={<Error />} />
       </Routes>
       <div className='footer__div'>

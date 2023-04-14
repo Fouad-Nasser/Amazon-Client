@@ -71,12 +71,12 @@ const Order = () => {
                 <Row>
                     <Row>
                         <Tabs
-                            defaultActiveKey="profile"
+                            defaultActiveKey="Orders"
                             id="fill-tab-example"
                             className="mb-3"
                             fill
                         >
-                            <Tab eventKey="home" title="Orders">
+                            <Tab eventKey="Orders" title="Orders">
                                 <Row>
                                     <Col xs={2}><p><h6><b>3 orders </b>placed in</h6> </p>
 
@@ -138,7 +138,7 @@ const Order = () => {
                                 </Row>
 
                             </Tab>
-                            <Tab eventKey="profile" title="Buy Again">
+                            <Tab eventKey="buy" title="Buy Again">
                                 <Row id="sentnceInOrder">
 
                                     <h6> Looks like you haven't placed an order in the last 3 months. <Link>View orders in 2023</Link></h6>

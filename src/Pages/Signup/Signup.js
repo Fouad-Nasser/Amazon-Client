@@ -4,8 +4,10 @@ import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './Signup.css'
+import { NavLink } from 'react-router-dom';
 
-function Signup() {
+
+function SignUpS() {
 
     const [user, setUser] = useState(
         {
@@ -74,7 +76,7 @@ function Signup() {
 
     return (
         <>
-            <img alt='' src='https://th.bing.com/th/id/R.61d9101a6841f5cd92afce057830fd7a?rik=3ymuV1eRqA8jHA&pid=ImgRaw&r=0' width={100} />
+            <img alt='' src='https://m.media-amazon.com/images/G/01/rainier/nav/SellerCentral_Bliss._CB485924389_.png' width={300} />
 
             <div className='container sign'>
                 <h3> Create account</h3>
@@ -110,13 +112,26 @@ function Signup() {
                         <small className='text-danger'>{errors.confirmPasswordError}</small>
                         {/* <Form.Check type="checkbox" label="Show Password"/> */}
                     </Form.Group>
-                    <p>By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.</p>
-
-                    <Button variant="warning" type="submit" className="btnWidth">
-                        continue
-                    </Button>
 
 
+                    <NavLink to="">
+                        <Button variant="warning" type="submit" style={{ backgroundColor: " #f0c14b" }} className="btnWidth">
+                            Next
+                        </Button>
+                    </NavLink>
+
+                    <hr></hr>
+                    <div className="text">
+                        <p >
+
+                            Already have an account? </p>
+                        <NavLink to="/SignInS">
+
+                            <p style={{ fontSize: "15px", fontWeight: "bolder", marginLeft: ".8rem" }}>
+                            Next</p>
+
+                        </NavLink>
+                    </div>
 
                 </Form>
             </div>
@@ -128,4 +143,4 @@ function Signup() {
 
 }
 
-export default Signup;
+export default SignUpS;

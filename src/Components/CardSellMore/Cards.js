@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+
 import "./Cards.css"
 class CardSellMore extends React.Component {
     render() {
@@ -10,13 +10,13 @@ class CardSellMore extends React.Component {
             <div className="card" id='cardBodyAll'>
 
                 <div className="card-body" id='cardBody'>
-                    <Row>
-                        <Col >{imageSrc && <img id='imgCardSellMore' src={imageSrc} alt="" />}</Col>
-                        <Col>
+                    
+                        <div >{imageSrc && <img id='imgCardSellMore' src={imageSrc} alt="" />}</div>
+                        <div>
                             <h3 className="card-title" id='CardSellMoreTitleCard'>{title}</h3>
                             {description && <p className="card-description" id='CardSellMoreTitleCardp'>{description}</p>}
-                        </Col>
-                    </Row>
+                        </div>
+                   
                 </div>
             </div>
 

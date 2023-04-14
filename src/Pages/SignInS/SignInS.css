@@ -20,3 +20,12 @@ img{
   box-shadow:outset 0 0 3px 3px rgb(255, 128, 0);
 
 }
+.Ckekbox{
+  display: flex;
+  font-size: small;
+  margin-top: 5vh;
+ 
+}
+Navbar{
+  text-decoration: none;
+}

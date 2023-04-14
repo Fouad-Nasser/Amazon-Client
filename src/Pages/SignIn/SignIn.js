@@ -1,9 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Col, Form, Toast } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import "./SignIn.css"
+import axios from "axios";
+
 const SignIn = () => {
+
+    const emailRef = useRef(null)
+    const passRef = useRef(null)
+
+
+    const handleSignIn = () => {
+
+        axios.post("http://localhost:8000/users/login", {
+            email: values.email,
+            password: values.password
+        }, {
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                var Token = response.data.token
+                localStorage.setItem("Token", Token)
+            });
+    }
 
     const [values, setValues] = useState({
         email: "",
@@ -20,6 +42,7 @@ const SignIn = () => {
             label: "Email or mobile phone number",
             patter: `/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/`,
             required: true,
+            ref: { emailRef }
         },
         {
             id: 4,
@@ -29,8 +52,11 @@ const SignIn = () => {
             errorMessage:
                 "Password must be 8-20 characters and include at least 1 UpperCase letter, 1lowerCase letter, 1 number and 1 special character!",
             label: `Password `,
-            pattern: `^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$`,
+            pattern: `{8,}$`,
+            // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).
             required: true,
+            ref: { passRef }
+
         },
     ];
 
@@ -46,8 +72,10 @@ const SignIn = () => {
     const [show, setShow] = useState(false);
     return (
         <>
-            <img id="CreateAccountSignInImg" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
-            <div className="row " >
+            <div className="register">
+
+                <img id="CreateAccountContinueImg2" src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"></img>
+            </div>            <div className="row " >
                 <div className="SignIn">
                     <div id="SignIn">
                         <form onSubmit={handleSubmit}>
@@ -58,9 +86,10 @@ const SignIn = () => {
                                     {...input}
                                     value={values[input.name]}
                                     onChange={(e) => onChange(e)}
+                                    ref={input.ref}
                                 />
                             ))}
-                            <a href="#" class="myButton mb-3" id="CreateAccountContinueButton">Sign in</a>
+                            <a href="#" class="myButton mb-3" id="CreateAccountContinueButton" onClick={handleSignIn}>Sign in</a>
                             <Col xs={6} id="Toast">
                                 <Toast onClose={() => setShow(false)} show={show} delay={30000} autohide >
                                     <Toast.Header>
@@ -77,7 +106,12 @@ const SignIn = () => {
                                 </Toast>
                             </Col>
                             <div className="row" id="CreateAccountContinueCheeck">
-                                <p><input className="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate"></input> Keep me Signed in, <a href="#" onClick={() => setShow(true)}>Details</a></p>
+                                <p><Form.Check
+                                    required
+                                    label="Agree to terms and conditions"
+                                    feedback="You must agree before submitting."
+                                    feedbackType="invalid"
+                                /> Keep me Signed in, <a href="#" onClick={() => setShow(true)}>Details</a></p>
                             </div>
                             <div className="row">
                                 <div class="separator">or</div>
