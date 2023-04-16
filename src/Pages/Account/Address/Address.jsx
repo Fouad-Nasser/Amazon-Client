@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { Link, Navigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Address.css";
+import axios from "axios";
 
-const Address = () => {
-  //   function handleRouteToAddAddress() {
-  //     Navigate("/SignIn");
-  //   }
+function Address() {
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/users", {
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM2MmJlNDYzZjA3ZjE3OTYzNmJmZTYiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgxMzgyMDcyfQ.VRR-r6WGrCS_wTRgN4hmbhw7jYvxGCApDLFrW3GnU0c",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setUser(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="container" id="containerAddressAccount">
@@ -52,17 +69,22 @@ const Address = () => {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <div>
-                    <b id="nameOfUserStaticData">اسامه بركات كمال</b>
-                  </div>
-                  <div id="streetOfUserStaticData">المهندس مجدي صلاح ١٦</div>
-                  <div id="bulidingOfUserStaticData">
-                    عمار 20 عماير البنك المركزي / الحي الثالث / المجاورة الثالثه
+                    <b id="nameOfUserStaticData">{user[3]?.name}</b>
                   </div>
                   <div id="streetOfUserStaticData">
-                    6th of October City Giza 3rd District Egypt
+                    street:
+                    {user[3]?.address.street}
+                  </div>
+                  <div id="bulidingOfUserStaticData">
+                    city:
+                    {user[3]?.address.city}
+                  </div>
+                  <div id="streetOfUserStaticData">
+                    postalCode:
+                    {user[3]?.address.postalCode}
                   </div>
                   <div id="PhoneOfUserStaticData">
-                    Phone number: ‪+201100435756‬
+                    Phone number: {user[3]?.phone}
                   </div>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -88,6 +110,6 @@ const Address = () => {
       </div>
     </>
   );
-};
+}
 
 export default Address;

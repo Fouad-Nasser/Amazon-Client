@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
@@ -10,16 +10,52 @@ import {
 import "./AddAddress.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import axios from "axios";
 
 function AddAddress() {
+  const FocusInput = () => {
+    // useEffect(() => {
+    axios
+      .put(
+        "http://localhost:8000/users/6437dd1c4891d1237c3ad071",
+        {
+          name: name.current.value,
+          phone: phone?.current.value,
+          address: {
+            city: city.current.value,
+            street: street.current.value,
+            buliding: postalCode.current.value,
+            postalCode: postalCode.current.value,
+          },
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM2MmJlNDYzZjA3ZjE3OTYzNmJmZTYiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgxMzgyMDcyfQ.VRR-r6WGrCS_wTRgN4hmbhw7jYvxGCApDLFrW3GnU0c",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // }, []);
+  };
+  const [address, setAddress] = useState([]);
+  const name = useRef();
+  const phone = useRef();
+  const city = useRef();
+  const street = useRef();
+  const postalCode = useRef();
+
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   const [phoneValue, setPhoneValue] = useState();
-
   const [radioValue, setRadioValue] = useState("");
-
   let outputValue = null;
-
   if (radioValue === "option1") {
     outputValue = <div></div>;
   } else if (radioValue === "option2") {
@@ -107,7 +143,7 @@ function AddAddress() {
               </h6>
             </Row>
             <Row>
-              <input type="text" className="form-control" />
+              <input type="text" className="form-control" ref={name} />
             </Row>
             <Row className="mt-3">
               <h6>
@@ -115,11 +151,18 @@ function AddAddress() {
               </h6>
             </Row>
             <Row>
-              <PhoneInput
+              {/* <PhoneInput
                 className="form-control"
                 placeholder="e.g. 1XXXXXXXXX"
-                value={phoneValue}
+                // value={phoneValue}
+                ref={phone}
                 onChange={setPhoneValue}
+              /> */}
+              <input
+                type="number"
+                className="form-control"
+                placeholder="e.g. 1XXXXXXXXX"
+                ref={phone}
               />
               <small>
                 <b>May be used to assist delivery</b>
@@ -133,20 +176,22 @@ function AddAddress() {
             <Row>
               <input
                 type="text"
+                ref={street}
                 className="form-control"
                 placeholder="e.g. Talaat Harb street"
               />
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Building name/no</b>
+                <b>postalCode no</b>
               </h6>
             </Row>
             <Row>
               <input
                 type="text"
+                ref={postalCode}
                 className="form-control"
-                placeholder="Buliding name or number"
+                placeholder="postalCode number"
               />
             </Row>
             <Row className="mt-3">
@@ -155,10 +200,11 @@ function AddAddress() {
               </h6>
             </Row>
             <Row>
-              <RegionDropdown
+              <input
                 className="form-select mt-2"
-                country={country}
-                value={region}
+                // country={country}
+                // value={region}
+                ref={city}
                 onChange={(val) => setRegion(val)}
               />
               <small>Can't find you city/area? Try a different spelling</small>
@@ -221,7 +267,12 @@ function AddAddress() {
               </Col>
             </Row>
             <Row className="mt-5">
-              <a href="#" class="myButton" id="CreateAccountContinueButton">
+              <a
+                href="#"
+                class="myButton"
+                id="CreateAccountContinueButton"
+                onClick={FocusInput}
+              >
                 Add Address
               </a>
             </Row>
