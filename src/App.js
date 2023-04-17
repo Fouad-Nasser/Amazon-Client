@@ -13,6 +13,8 @@ import ProductDetalis from './Pages/Product_Detalis/product_detalis';
 import Cart from './Pages/Cart/cart';
 import Address from "./Pages/Account/Address/Address";
 import AddAddress from "./Pages/Account/Address/AddAddress/AddAddress";
+import Profile from "./Pages/Account/profile/profile";
+import EditProfile from "./Pages/Account/profile/editProfile/editProfile";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path='/Order' element={<Order />} />
         <Route path='/Address' element={<Address />} />
         <Route path='/AddAddress' element={<AddAddress />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/editProfile' element={<EditProfile />} />
         <Route path='*' element={<Error />} />
       </Routes>
       <div className='footer__div'>

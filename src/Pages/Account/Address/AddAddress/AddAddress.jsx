@@ -9,7 +9,6 @@ import {
 } from "react-country-region-selector";
 import "./AddAddress.css";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
 import axios from "axios";
 
 function AddAddress() {
@@ -44,7 +43,6 @@ function AddAddress() {
       });
     // }, []);
   };
-  const [address, setAddress] = useState([]);
   const name = useRef();
   const phone = useRef();
   const city = useRef();
@@ -53,7 +51,6 @@ function AddAddress() {
 
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
-  const [phoneValue, setPhoneValue] = useState();
   const [radioValue, setRadioValue] = useState("");
   let outputValue = null;
   if (radioValue === "option1") {
