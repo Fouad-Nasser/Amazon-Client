@@ -15,6 +15,8 @@ import Address from "./Pages/Account/Address/Address";
 import AddAddress from "./Pages/Account/Address/AddAddress/AddAddress";
 import Profile from "./Pages/Account/profile/profile";
 import EditProfile from "./Pages/Account/profile/editProfile/editProfile";
+import ForgetPassword from "./Pages/Account/forgetPassword/forgetPassword";
+import OTP from "./Pages/Account/forgetPassword/OTP/OTP";
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Route path='/AddAddress' element={<AddAddress />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/editProfile' element={<EditProfile />} />
+        <Route path='/forgetPassword' element={<ForgetPassword />} />
+        <Route path='/OTP' element={<OTP />} />
         <Route path='*' element={<Error />} />
       </Routes>
       <div className='footer__div'>
