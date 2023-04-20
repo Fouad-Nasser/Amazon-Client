@@ -9,12 +9,9 @@ import SignIn from './Pages/SignIn/SignIn';
 import Account from './Pages/Account/Account';
 import Order from "./Pages/Order/Order";
 
-<<<<<<< HEAD
 import ProductDetalis from './Pages/Product_Detalis/product_detalis';
 import Cart from './Pages/Cart/cart';
 import OverlayAll from "./Components/overlayAll";
-=======
->>>>>>> 858288f493989a495fca36a9d83e4b8e35b398fc
 
 function App() {
   return (
@@ -35,7 +32,6 @@ function App() {
         <Footer />
       </div>
     </div>
-
   );
 }
 

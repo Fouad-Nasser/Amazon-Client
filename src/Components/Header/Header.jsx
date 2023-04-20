@@ -32,7 +32,7 @@ const Header = () => {
         console.log(selectedItem);
         setDropCategory(selectedItem)
     }
-    
+
     // Search Part
     const FetchDataSearch = (value) => {
         axios.get('http://localhost:3000/products').then((res) => {
@@ -112,15 +112,12 @@ const Header = () => {
                                             })
                                         }
                                     </div>
-                                    </div>
-                                    <input id="header__searchInput" type="text" />
                                 </div>
                                 <div class="nav-right">
                                     <svg className='pe-auto' id="header__searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                     </svg>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -201,9 +198,6 @@ const Header = () => {
                     <div className="left d-flex">
                         <div className='p-1 cart-data d-flex justify-content-center'>
                             <OverlayAll />
-                        <div className='p-1 cart-data d-flex justify-content-center '>
-                            <AiOutlineMenu className='text-xl mr-1' />
-                            All
                         </div>
                         <NavLink className='text-white mt-1 text-decoration-none' to="/">
                             <span className='p-1 px-2 cart-data'>Today's Deal</span>
@@ -221,9 +215,8 @@ const Header = () => {
                             <span className='p-1 px-2 cart-data'>Sell</span>
                         </NavLink>
                     </div>
-
                 </div>
-            </div >
+            </div>
         </header >
     )
 }

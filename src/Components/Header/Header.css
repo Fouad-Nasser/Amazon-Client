@@ -201,6 +201,10 @@
 	padding: 0 0.5rem 0 0.5rem;
 	cursor: pointer;
 }
+/* 
+#nav-search-bar-form .nav-right > button:hover {
+	background: var(--main-text);
+} */
 
 #nav-belt > .nav-right {
 	box-sizing: border-box;
