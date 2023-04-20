@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./Header.css";
 import { useSelector } from 'react-redux';
+// import { ImSearch } from 'react-icons/im'
+import { AiOutlineMenu } from 'react-icons/ai'
 import { NavLink, Link } from 'react-router-dom';
 import { Button, Col, Dropdown, Row } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -22,7 +24,6 @@ const Header = () => {
         axios.get('http://localhost:3000/categorys').then((res) => {
             console.log(res.data.data);
             setCategory(res.data.data)
-
         }).catch((err) => {
             console.log(err);
         })
@@ -31,7 +32,7 @@ const Header = () => {
         console.log(selectedItem);
         setDropCategory(selectedItem)
     }
-
+    
     // Search Part
     const FetchDataSearch = (value) => {
         axios.get('http://localhost:3000/products').then((res) => {
@@ -76,6 +77,8 @@ const Header = () => {
                                 <div class="nav-fill">
                                     {/* <div className="nav-left" >
                                         <NavDropdown className='h-25' title={`${dropCategory}`} style={{ color: 'white', margin: 'auto', background: '#cdcdcd' }} id="navbarScrollingDropdown1">
+                                    <div className="nav-left" >
+                                        <NavDropdown className='h-25' title={`${dropCategory}`} style={{ color: 'white', margin: 'auto' }} id="navbarScrollingDropdown1">
                                             <div id='navbarScrollingDropdownHeaderAll'>
                                                 <Row style={{ width: '17rem', textAlign: 'center' }}>
                                                     <Col id='Col_ALL' >
@@ -109,6 +112,8 @@ const Header = () => {
                                             })
                                         }
                                     </div>
+                                    </div>
+                                    <input id="header__searchInput" type="text" />
                                 </div>
                                 <div class="nav-right">
                                     <svg className='pe-auto' id="header__searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -196,6 +201,9 @@ const Header = () => {
                     <div className="left d-flex">
                         <div className='p-1 cart-data d-flex justify-content-center'>
                             <OverlayAll />
+                        <div className='p-1 cart-data d-flex justify-content-center '>
+                            <AiOutlineMenu className='text-xl mr-1' />
+                            All
                         </div>
                         <NavLink className='text-white mt-1 text-decoration-none' to="/">
                             <span className='p-1 px-2 cart-data'>Today's Deal</span>
@@ -213,6 +221,7 @@ const Header = () => {
                             <span className='p-1 px-2 cart-data'>Sell</span>
                         </NavLink>
                     </div>
+
                 </div>
             </div >
         </header >

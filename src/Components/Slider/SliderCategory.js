@@ -18,7 +18,6 @@ const SliderCategory = ({ categoryID, flag }) => {
             console.log(err);
         })
     })
-
     const CheckSlider = product.map((item) => (
         (flag === false && < SwiperSlide key={item.id} >
             <span className='a-list-item-slider'>
