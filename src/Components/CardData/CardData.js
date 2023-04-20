@@ -10,7 +10,7 @@ function CardData({ item }) {
                     <Card.Body>
                         <Card.Title >{item.name}</Card.Title>
                         <NavLink>
-                            <Card.Img variant="top" src={item.image} className='img-fluid' />
+                            <Card.Img variant="top" src={item.image} className='img-fluid' style={{ maxHeight: '15rem' }} />
                         </NavLink>
                         <NavLink className='mt-1 text-decoration-none '>
                             <div className=''>

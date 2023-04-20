@@ -83,15 +83,45 @@
 #nav-search-bar-form {
 	box-sizing: border-box;
 	display: flex;
+	width: auto;
 	flex: 1 1 auto;
-	border-radius: var(--border-radius);
+	border-radius:  var(--border-radius);
 	overflow: hidden;
 }
+.searchListResult{
+	padding: 6px 15px;
+	/* margin-bottom: 5px; */
+	font-weight: bold;
+	color: #666;
+	flex: 1 1 auto;
+}
+.searchList_icon{
+	padding: 14px 15px;
+	margin-bottom: 5px;
+}
 #header__searchInput {
-  height: 30px;
-  padding: 10px;
-  border: none;
-  width: 95%;
+	height: 30px;
+	padding: 10px;
+	border: none;
+	outline: none;
+}
+ #SearchResultList{
+	margin-left: 2px;
+    margin-top: 11px;
+	position: absolute;
+	max-width: 60.2em;
+	max-height: 10rem;
+	overflow-y: scroll;
+	width: 100%;
+	background: white;
+}
+.searchListResult:hover{
+	background: #cdcdcd;
+	color: #131921;
+}
+#DivHeaderSearchBar{
+	width: 95%;
+	position: relative;
 }
 #nav-search-bar-form:focus-within {
 	box-sizing: border-box;
@@ -112,7 +142,7 @@
 #nav-search-bar-form .nav-left #navbarScrollingDropdown1 {
 	display: flex;
 	color: black;
-	padding: 0.5rem 0.5rem 0 0.5rem;
+	padding: 0.5rem 0.5rem 6px 0.5rem;
 	flex: 1 1 auto;
 	width: 100%;
 	float: none;
@@ -122,22 +152,22 @@
 
 #nav-search-bar-form .nav-fill {
 	box-sizing: border-box;
-	display: flex;
+	/* display: flex; */
 	position: static;
   	float: none;
 	flex: 1 1 auto;
 	overflow-x: hidden;
 	overflow-y: hidden;
 	background: white;
-	border-left:auto solid var(--main-search-opt);
+	/* border-left:auto solid var(--main-search-opt); */
 	border-right: 0.1rem solid var(--main-text);
 }
-#nav-search-bar-form .nav-left {
+#nav-search-bar-form .nav-fill .nav-left {
 	box-sizing: border-box;
   	display: flex;
-	position: absolute;
-  /* background: var(--main-search-opt); */
-  align-items: center;
+	position:absolute;
+	background:auto solid var(--main-search-opt);
+	align-items: center;
 }
 #nav-search-bar-form .nav-fill input {
 	box-sizing: border-box;
@@ -171,10 +201,6 @@
 	padding: 0 0.5rem 0 0.5rem;
 	cursor: pointer;
 }
-/* 
-#nav-search-bar-form .nav-right > button:hover {
-	background: var(--main-text);
-} */
 
 #nav-belt > .nav-right {
 	box-sizing: border-box;
@@ -293,3 +319,43 @@ top:1px;
 	background-image: url(https://m.media-amazon.com/images/G/42/gno/sprites/nav-sprite-global-2x-hm-dsk-reorg._CB405931292_.png);
 	background-size: 350px;
   }
+  .All_closeBtn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 390px;
+	color: white;
+	font-size: 50px;
+	cursor: pointer;
+	transform: translateY(-5px);
+	z-index: 75;
+  }
+
+  /****************input search box ***************/
+.inputsearch{
+    width:650px;
+    margin:5px 0px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.AllSelectCatory select{
+    width:  50px;
+    height: 100%;
+    border:none;
+    background-color: rgb(233, 233, 233);
+}
+.AllSelectCatory select:hover{
+    background-color: rgb(197, 195, 195);
+}
+.searchicon{
+    height: 42px;
+    width: 60px;
+    font-size: 25px;
+}
+.inputsearchbox input{
+    width: 540px;
+    border:none;
+    outline:none;
+    padding:0px 5px;
+    font-size: 18px;
+}

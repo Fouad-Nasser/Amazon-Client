@@ -25,7 +25,7 @@ function Footer() {
     window.addEventListener('scroll', toggleVisible);
     return (
         <div >
-            <footer className="text-center text-lg-start sticky-bottom">
+            <footer className="text-center text-lg-start sticky-bottom" style={{ zIndex: '50' }}>
                 {/* Part SignUp */}
                 <NavLink className='text-decoration-none'>
                     <div>

@@ -11,12 +11,13 @@ import Order from "./Pages/Order/Order";
 
 import ProductDetalis from './Pages/Product_Detalis/product_detalis';
 import Cart from './Pages/Cart/cart';
+import OverlayAll from "./Components/overlayAll";
 
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Routes>
+      <Routes >
         <Route path="/" element={<Home />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/product/:productId' element={<ProductDetalis />} />

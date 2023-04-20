@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import "./Header.css";
-// import { ImSearch } from 'react-icons/im'
 import { useSelector } from 'react-redux';
-import { AiOutlineMenu } from 'react-icons/ai'
 import { NavLink, Link } from 'react-router-dom';
 import { Button, Col, Dropdown, Row } from 'react-bootstrap';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import axios from 'axios';
+import Sidenavbar from '../Sidebar/Sidenavbar';
+import { Transition } from 'react-transition-group';
+import OverlayAll from '../overlayAll';
 const Header = () => {
     const { cartItems } = useSelector(state => state.cart);
     const [dropCategory, setDropCategory] = useState('All');
     const [category, setCategory] = useState([])
+    const [navOpen, setNavOpen] = useState(false)
+
+    const [inputdata, setInputData] = useState('')
+    const [searchDataResult, setSearchDataResult] = useState([])
+
+
     useEffect(() => {
         axios.get('http://localhost:3000/categorys').then((res) => {
             console.log(res.data.data);
             setCategory(res.data.data)
+
         }).catch((err) => {
             console.log(err);
         })
@@ -22,6 +30,30 @@ const Header = () => {
     const SelectedCategory = (selectedItem) => {
         console.log(selectedItem);
         setDropCategory(selectedItem)
+    }
+
+    // Search Part
+    const FetchDataSearch = (value) => {
+        axios.get('http://localhost:3000/products').then((res) => {
+            const ReturnedData = res.data.data.filter((product) => {
+                if (searchDataResult === "") return value;
+                else return (product && product.name && product.name.toLowerCase().includes(value));
+            })
+            setSearchDataResult(ReturnedData)
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }
+    const handleChange = (value) => {
+        setInputData(value);
+        FetchDataSearch(value);
+    }
+    const overlaySearchBar = () => {
+        console.log(navOpen);
+        setNavOpen(true);
+        console.log(navOpen);
+        // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
     return (
         <header id="container">
@@ -42,8 +74,8 @@ const Header = () => {
                         <div id="nav-search">
                             <div id="nav-search-bar-form">
                                 <div class="nav-fill">
-                                    <div className="nav-left" >
-                                        <NavDropdown className='h-25' title={`${dropCategory}`} style={{ color: 'white', margin: 'auto' }} id="navbarScrollingDropdown1">
+                                    {/* <div className="nav-left" >
+                                        <NavDropdown className='h-25' title={`${dropCategory}`} style={{ color: 'white', margin: 'auto', background: '#cdcdcd' }} id="navbarScrollingDropdown1">
                                             <div id='navbarScrollingDropdownHeaderAll'>
                                                 <Row style={{ width: '17rem', textAlign: 'center' }}>
                                                     <Col id='Col_ALL' >
@@ -59,14 +91,31 @@ const Header = () => {
                                                 </Row>
                                             </div>
                                         </NavDropdown>
+                                    </div> */}
+                                    <div id='DivHeaderSearchBar'>
+                                        <input id="header__searchInput" type="text" placeholder='Search Amazon.eg' onClick={overlaySearchBar} onChange={(e) => { handleChange(e.target.value) }} />
                                     </div>
-                                    <input id="header__searchInput" type="text" />
+                                    <div id="SearchResultList" style={{ zIndex: '60' }}>
+                                        {
+                                            searchDataResult.map((result) => {
+                                                return <div className='d-flex' onClick={() => { console.log(result.name); }}>
+                                                    <NavLink to='/' className='text-decoration-none searchListResult'>
+                                                        <div key={result._id} className=''>
+                                                            <span >{result.name}</span>
+                                                        </div>
+                                                    </NavLink>
+                                                    {/* <i class="fas fa-times fa-ms searchList_icon" style={{ color: '#b9acac' }}></i> */}
+                                                </div>
+                                            })
+                                        }
+                                    </div>
                                 </div>
                                 <div class="nav-right">
                                     <svg className='pe-auto' id="header__searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                     </svg>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -145,9 +194,8 @@ const Header = () => {
                 </div>
                 <div className="p-1 nav_bar text-white">
                     <div className="left d-flex">
-                        <div className='p-1 cart-data d-flex justify-content-center '>
-                            <AiOutlineMenu className='text-xl mr-1' />
-                            All
+                        <div className='p-1 cart-data d-flex justify-content-center'>
+                            <OverlayAll />
                         </div>
                         <NavLink className='text-white mt-1 text-decoration-none' to="/">
                             <span className='p-1 px-2 cart-data'>Today's Deal</span>
@@ -165,7 +213,6 @@ const Header = () => {
                             <span className='p-1 px-2 cart-data'>Sell</span>
                         </NavLink>
                     </div>
-
                 </div>
             </div >
         </header >

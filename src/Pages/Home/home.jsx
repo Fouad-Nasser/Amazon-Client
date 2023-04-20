@@ -7,7 +7,8 @@ import { Card, Row } from 'react-bootstrap';
 import Slider from '../../Components/Slider/SliderCategory';
 import CardData from '../../Components/CardData/CardData';
 import SliderCategory from '../../Components/Slider/SliderCategory';
-import SliderFooter from '../../Components/Slider/SliderFooter';
+import Header from './../../Components/Header/Header';
+import OverlayAll from './../../Components/overlayAll';
 
 function Home() {
     const [category, setCategory] = useState([]);

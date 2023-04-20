@@ -7,22 +7,23 @@ import axios from 'axios';
 import './Slider.css';
 
 const SliderCategory = ({ categoryID, flag }) => {
-    console.log(categoryID, " ", flag);
+    // console.log(categoryID, " ", flag);
     const [product, setProduct] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:3000/products?categoryID=${categoryID}`).then((res) => {
-            console.log(res.data.data);
+            // console.log(res.data.data);
             setProduct(res.data.data)
         }).catch((err) => {
             console.log(err);
         })
     })
+
     const CheckSlider = product.map((item) => (
         (flag === false && < SwiperSlide key={item.id} >
             <span className='a-list-item-slider'>
                 <NavLink to="/">
-                    <img className='img-responsive' src={item.images} />
+                    <img className='img-responsive' src={item.images}  />
                 </NavLink>
             </span>
         </SwiperSlide >) ||
@@ -70,7 +71,7 @@ const SliderCategory = ({ categoryID, flag }) => {
     return (
         <Swiper
             modules={[Navigation]}
-            // spaceBetween={20}
+            spaceBetween={50}
             slidesPerView={1}
             navigation
             breakpoints={
