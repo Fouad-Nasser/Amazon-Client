@@ -20,6 +20,7 @@ function Sidedropdown() {
     } else {
         arrowDirection = "fas fa-chevron-up";
     }
+  
     const CategoryData = catdata.slice(5, 16).map((item) => {
         return (
             <div className="sidenavRow">

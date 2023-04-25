@@ -81,7 +81,8 @@ function Home() {
                 <div className="home__row">
                     <Row xs={3} md={4} sm={3} className='m-4'>
                         {category.slice(0, 8).map((item) => (
-                            <CardData item={item} />
+
+                            < CardData item={item} />
                         ))}
                     </Row>
                 </div>

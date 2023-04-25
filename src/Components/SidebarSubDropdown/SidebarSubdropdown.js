@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SidebarSubdropdown(props) {
-    console.log(props.CategoryID);
+    console.log(props);
     return (
         <div>
             <div className="sub-container" style={props.state === "entering" ? { animation: "moveSubContainer .3s forwards" } :
