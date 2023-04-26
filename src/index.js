@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import './i18n';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './Store/store';
 import { BrowserRouter } from 'react-router-dom';
+import 'flag-icon-css/css/flag-icon.min.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

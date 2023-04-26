@@ -36,9 +36,7 @@
     height: auto;
     min-height: 300px;
 }
-.active {
-    border: 2px solid #e77600;
-}
+
 
 .addToCart{
     padding: 1rem;

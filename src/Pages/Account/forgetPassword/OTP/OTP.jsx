@@ -5,8 +5,12 @@ import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import Input from "../../../../Components/Input/Input";
 import Accordion from "react-bootstrap/Accordion";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const OTP = () => {
+  const { t, i18n } = useTranslation();
+  const { userInfo } = useSelector((state) => state.user);
   const handleSignIn = () => {
     axios
       .put(
@@ -62,15 +66,15 @@ const OTP = () => {
           <Card className="p-3">
             <Card.Title className="text-center mt-4">
               <h3>
-                <b>Verification required</b>
+                <b>{t("Verification required")}</b>
               </h3>
             </Card.Title>
 
             <Card.Body>
               <p id="CreateAccountSignInTitle">
-                To continue, complete this verification step. We've <br /> sent
-                a One Time Password (OTP) to the mobile <br /> number
-                +201100435756. Please enter it below.
+                {t("this verification step")} <br /> {t("One Time Password")}{" "}
+                <br />
+                {userInfo?.phone} {t("Please enter it below")}.
               </p>
               {inputs.map((input) => (
                 <Input
@@ -86,27 +90,22 @@ const OTP = () => {
                 id="CreateAccountContinueButton"
                 onClick={handleSignIn}
               >
-                Continue
+                {t("Continue")}
               </a>
               <div className="row text-center">
-                <Link>Resend OTP</Link>
+                <Link>{t("Resend OTP")}</Link>
               </div>
               <div className="row">
                 <Accordion>
                   <Accordion.Item eventKey="0">
-                    <Accordion.Header>I need more help</Accordion.Header>
+                    <Accordion.Header>{t("I need more help")}</Accordion.Header>
                     <Accordion.Body>
-                      If you've already tried to reset your password, but
-                      haven't <br /> received an email from Amazon, check your
-                      Junk or Spam <br /> folder. <br /> If you can't access
-                      your email, try resetting that first <br /> through your
-                      email provider. <br /> If you've recently updated your
-                      password, your old <br /> password could still be saved in
-                      your browser. Try <br /> clearing your browser history and
-                      re-typing your <br /> password. <br /> If you need more
-                      password help, call us at 1-800-383- <br /> 9484 or, if
-                      outside the U.S. or Canada, 1-206-577-1364 <br />{" "}
-                      (International, charges may apply).
+                      {t("If you've already")}
+                      <br /> {t("but haven't received")}
+                      <br /> {t("check your Junk")} <br />{" "}
+                      {t("If you can't access")}
+                      <br /> {t("try resetting that first")} <br />{" "}
+                      {t("through your email provider.")}
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>

@@ -4,8 +4,10 @@ import Input from "../../Components/Input/Input";
 import "./SignIn.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SignIn = () => {
+  const { t, i18n } = useTranslation();
   const emailRef = useRef(null);
   const passRef = useRef(null);
 
@@ -26,7 +28,7 @@ const SignIn = () => {
       .then((response) => {
         console.log(response);
         var Token = response.data.token;
-        localStorage.setItem("Token", Token);
+        localStorage.setItem("token", Token);
       });
   };
 
@@ -73,7 +75,7 @@ const SignIn = () => {
   };
   const [show, setShow] = useState(false);
   return (
-    <>
+    <div class="text-center">
       <div className="register">
         <img
           id="CreateAccountContinueImg2"
@@ -84,7 +86,7 @@ const SignIn = () => {
         <div className="SignIn">
           <div id="SignIn">
             <form onSubmit={handleSubmit}>
-              <h3 id="CreateAccountSignInTitle">SignIn</h3>
+              <h3 id="CreateAccountSignInTitle">{t("SignIn")}</h3>
               {inputs.map((input) => (
                 <Input
                   key={input.id}
@@ -100,7 +102,7 @@ const SignIn = () => {
                 id="CreateAccountContinueButton"
                 onClick={handleSignIn}
               >
-                Sign in
+                {t("SignIn")}
               </a>
               <Col xs={6} id="Toast">
                 <Toast
@@ -116,14 +118,13 @@ const SignIn = () => {
                       alt=""
                     />
                     <strong className="m-auto" id="ToastTitle">
-                      "Keep Me Signed In" Checkbox
+                      {t("Checkbox")}
                     </strong>
                   </Toast.Header>
                   <Toast.Body>
-                    Choosing "Keep me signed in" reduces the number of times
-                    you're asked to Sign-In on this device. <br />
-                    To keep your account secure, use this option only on your
-                    personal devices.
+                    {t("Choosing")}
+                    <br />
+                    {t("To keep your account secure")}
                   </Toast.Body>
                 </Toast>
               </Col>
@@ -131,26 +132,26 @@ const SignIn = () => {
                 <p>
                   <Form.Check
                     required
-                    label="Agree to terms and conditions"
+                    label={t("Agree to terms and conditions")}
                     feedback="You must agree before submitting."
                     feedbackType="invalid"
                   />{" "}
-                  Keep me Signed in,{" "}
+                  {t("Keep me Signed in,")}{" "}
                   <a href="#" onClick={() => setShow(true)}>
-                    Details
+                    {t("Details")}
                   </a>
                 </p>
               </div>
               <div className="row">
-                <div class="separator">or</div>
+                <div class="separator">{t("or")}</div>
               </div>
               <div className="row">
-                <Link to={"/forgetPassword"}>Forget Password ?</Link>
+                <Link to={"/forgetPassword"}>{t("Forget Password")}</Link>
               </div>
               <div className="row d-flex justify-content-center">
                 <Link to={"/forgetPassword"}>
                   <a href="#" class="myButton2 text-center">
-                    get an OTP on your phone
+                    {t("get an OTP on your phone")}
                   </a>
                 </Link>
               </div>
@@ -158,7 +159,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

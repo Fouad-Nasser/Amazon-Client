@@ -10,8 +10,10 @@ import {
 import "./AddAddress.css";
 import "react-phone-number-input/style.css";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function AddAddress() {
+  const { t, i18n } = useTranslation();
   const FocusInput = () => {
     // useEffect(() => {
     axios
@@ -58,7 +60,7 @@ function AddAddress() {
   } else if (radioValue === "option2") {
     outputValue = (
       <div>
-        <p>Is your office open on weekends?</p>
+        <p>{t("Is your office open on weekends?")}</p>
         <Row>
           <Col>
             {" "}
@@ -69,7 +71,7 @@ function AddAddress() {
               className="form-check-input"
             />
             <label className="form-check-label" for="checkBox1">
-              Friday
+              {t("Friday")}
             </label>
           </Col>
           <Col>
@@ -81,7 +83,7 @@ function AddAddress() {
               className="form-check-input"
             />
             <label className="form-check-label" for="checkBox2">
-              Saturday
+              {t("Saturday")}
             </label>
           </Col>
         </Row>
@@ -99,30 +101,30 @@ function AddAddress() {
             <Row>
               <div>
                 <Link id="LinkitleOrder" to={"/Account"}>
-                  Your Account
+                  {t("Your Account")}
                 </Link>{" "}
                 {">"}
                 <Link id="LinkitleOrder" to={"/Address"}>
-                  Your Adresses
+                  {t("Your Adresses")}
                 </Link>{" "}
                 {">"}
-                <span id="spanTitleOrder"> Add Address</span>
+                <span id="spanTitleOrder"> {t("Edit Address")}</span>
               </div>
             </Row>
             <Row id="AddnewAddressTitle">
               <h3>
-                <b>Add a new address</b>
+                <b>{t("Edit a new address")}</b>
               </h3>
             </Row>
             <Row>
               <Link id="findAmazonPickup">
                 <i id="geoAlt" class="bi bi-geo-alt-fill"></i>
-                <span>Or find an Amazon pickup location near you</span>
+                <span>{t("Or find an Amazon pickup")}</span>
               </Link>
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Country/Region</b>
+                <b>{t("Country/Region")}</b>
               </h6>
             </Row>
             <Row>
@@ -136,7 +138,7 @@ function AddAddress() {
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Full name (First and Last name)</b>
+                <b>{t("Full name")}</b>
               </h6>
             </Row>
             <Row>
@@ -144,7 +146,7 @@ function AddAddress() {
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Mobile number</b>
+                <b>{t("phone")}</b>
               </h6>
             </Row>
             <Row>
@@ -162,12 +164,12 @@ function AddAddress() {
                 ref={phone}
               />
               <small>
-                <b>May be used to assist delivery</b>
+                <b>{t("May be used to assist delivery")}</b>
               </small>
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Street address</b>
+                <b>{t("street")}</b>
               </h6>
             </Row>
             <Row>
@@ -180,7 +182,7 @@ function AddAddress() {
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>postalCode no</b>
+                <b>{t("postalCode")}</b>
               </h6>
             </Row>
             <Row>
@@ -193,7 +195,7 @@ function AddAddress() {
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>City/Area</b>
+                <b>{t("City/Area")}</b>
               </h6>
             </Row>
             <Row>
@@ -204,11 +206,11 @@ function AddAddress() {
                 ref={city}
                 onChange={(val) => setRegion(val)}
               />
-              <small>Can't find you city/area? Try a different spelling</small>
+              <small>{t("Can't find you city/area")}</small>
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Nearest Landmark</b>
+                <b>{t("Nearest Landmark")}</b>
               </h6>
             </Row>
             <Row>
@@ -219,11 +221,11 @@ function AddAddress() {
               />
             </Row>
             <Row className="mt-3">
-              <h4>Add delivery instructions (optional)</h4>
+              <h4>{t("Add delivery instructions")}</h4>
             </Row>
             <Row className="mt-3">
               <h6>
-                <b>Address Type</b>
+                <b>{t("Address Type")}</b>
               </h6>
             </Row>
             <Row className="mt-3">
@@ -239,7 +241,7 @@ function AddAddress() {
                     onChange={(e) => setRadioValue(e.target.value)}
                   />
                   <label className="form-check-label" for="flexRadioDefault">
-                    Home (7am-9pm, all days)
+                    {t("Home (7am-9pm, all days)")}
                   </label>
                 </div>
               </Col>
@@ -255,7 +257,7 @@ function AddAddress() {
                     onChange={(e) => setRadioValue(e.target.value)}
                   />
                   <label className="form-check-label" for="flexRadioDefault2">
-                    Office (delivery from Sun-Thu)
+                    {t("Office (delivery from Sun-Thu)")}
                   </label>
                 </div>
                 <div>
@@ -270,7 +272,7 @@ function AddAddress() {
                 id="CreateAccountContinueButton"
                 onClick={FocusInput}
               >
-                Add Address
+                {t("EDit Address")}
               </a>
             </Row>
           </div>

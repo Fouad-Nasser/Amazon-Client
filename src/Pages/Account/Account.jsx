@@ -78,11 +78,13 @@ class Account extends React.Component {
             </Link>
           </div>
           <div className="col">
-            <AccountCard
-              imageSrc="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/digital_devices._CB660668735_.png"
-              title="Degitial Services & Device support"
-              description="track, return, cancle anr order,download or buy again"
-            />
+            <Link to={"/updatePassword"} id="LinkAccount">
+              <AccountCard
+                imageSrc="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/digital_devices._CB660668735_.png"
+                title="Update Password"
+                description="track, return, cancle anr order,download or buy again"
+              />
+            </Link>
           </div>
           <div className="col">
             <AccountCard

@@ -5,43 +5,45 @@ import Input from "../../../Components/Input/Input";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ForgetPassword = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const handleSignIn = () => {
-    axios
-      .put(
-        "http://localhost:8000/users/6437dd1c4891d1237c3ad071",
-        {
-          phone: values.phone,
-        },
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM2MmJlNDYzZjA3ZjE3OTYzNmJmZTYiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgxMzgyMDcyfQ.VRR-r6WGrCS_wTRgN4hmbhw7jYvxGCApDLFrW3GnU0c",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        alert("update Password");
-        navigate("/OTP");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleSignIn = () => {
+  //   axios
+  //     .put(
+  //       "http://localhost:8000/users/6437dd1c4891d1237c3ad071",
+  //       {
+  //         email: values.email,
+  //       },
+  //       {
+  //         headers: {
+  //           "content-type": "application/json",
+  //           Authorization:
+  //             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM2MmJlNDYzZjA3ZjE3OTYzNmJmZTYiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgxMzgyMDcyfQ.VRR-r6WGrCS_wTRgN4hmbhw7jYvxGCApDLFrW3GnU0c",
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       alert("update Password");
+  //       navigate("/OTP");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const [values, setValues] = useState({
-    phone: "",
+    email: "",
   });
   const inputs = [
     {
       id: 1,
-      name: "phone",
+      name: "email",
       type: "text",
-      placeholder: "enter the phone",
-      errorMessage: "It should be a valid phone number!",
+      placeholder: "enter the email",
+      errorMessage: "It should be a valid email address!",
       label: "Email or mobile phone number",
       patter: `/^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/`,
       required: true,
@@ -63,14 +65,13 @@ const ForgetPassword = () => {
           <Card className="p-3">
             <Card.Title className="text-center mt-4">
               <h3>
-                <b>Password assistance</b>
+                <b>{t("Password assistance")}</b>
               </h3>
             </Card.Title>
 
             <Card.Body>
-              <p id="CreateAccountSignInTitle">
-                Enter the email address or mobile phone number <br /> associated
-                with your Amazon account.
+              <p id="CreateAccountSignInTitle text-center">
+                {t("Enter the")} <br /> {t("associated")}
               </p>
               {inputs.map((input) => (
                 <Input
@@ -84,18 +85,18 @@ const ForgetPassword = () => {
                 href="#"
                 class="myButton mb-3"
                 id="CreateAccountContinueButton"
-                onClick={handleSignIn}
+                onClick={navigate("/OTP")}
               >
-                Continue
+                {t("Continue")}
               </a>
             </Card.Body>
           </Card>
-          <h5 className="mt-3">Has your email or mobile number changed?</h5>
+          <h5 className="mt-3">{t("Has your email")}</h5>
           <div className="row">
             <p>
-              If you no longer use the email address associated with your <br />{" "}
-              Amazon account, you may contact <a href="">Customer Service</a>{" "}
-              for <br /> help restoring access to your account.
+              {t("If you no longer")} <br />{" "}
+              <a href="">{t("Customer Service")}</a>
+              <br /> {t("help restoring")}
             </p>
           </div>
         </div>

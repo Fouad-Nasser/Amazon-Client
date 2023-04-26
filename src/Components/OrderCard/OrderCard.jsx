@@ -1,91 +1,73 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "./OrderCard.css";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import axios from "axios";
+import Table from "react-bootstrap/Table";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 function OrderCard({ item }) {
+  const { userInfo } = useSelector((state) => state.user);
+  const { t, i18n } = useTranslation();
+  const handleDelete = (id) => {
+    axios
+      .delete(`http://localhost:8000/orders/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("order deleted succefully");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
-      <Card className="text-center mt-4">
-        <Card.Header>
-          <Row>
-            <Col>
-              <p>
-                <b>Tax Price:</b> {item.taxPrice}
-              </p>
-            </Col>
-            <Col>
-              <p>
-                <b>shippingPrice:</b> {item.shippingPrice}
-              </p>
-            </Col>
-            <Col>
-              <p>
-                <b>ship to :</b> {item.user?.name}
-              </p>
-            </Col>
-            <Col>
-              {" "}
-              <Link id="orderDetails">Order Details </Link>{" "}
-              <Link id="Invoc"> Invoice</Link>
-            </Col>
-          </Row>
-        </Card.Header>
-
-        <Card.Body>
-          {/* <Card.Title>Details:</Card.Title> */}
-          <div className="row ">
-            <div className="col">
-              <div>
-                <b>address</b>:
-              </div>
-              <div>
-                {item.user?.address.city},{item.user?.address.street}
-              </div>
-            </div>
-            <div className="col"></div>
-            <div className="col"></div>
-          </div>
-          <div className="row ">
-            <div className="col">
-              <div>
-                <b>phone number</b>:
-              </div>
-              <div>{item.user?.phone}</div>
-            </div>
-            <div className="col"></div>
-            <div className="col"></div>
-          </div>
-          <Card.Img variant="center" src="holder.js/100px180?text=Image cap" />
-          <Card.Text>
-            <Row>
-              <p>
-                <b>Item Price</b>: {item.itemsPrice}
-              </p>
-            </Row>
-            <Row>
-              <p>
-                <b>totalPrice</b>:{" "}
-                {item.itemsPrice + item.shippingPrice + item.taxPrice}
-              </p>
-            </Row>
-          </Card.Text>
-          <Row>
-            <Col>{/* <Button variant="warning">view details</Button> */}</Col>
-            <Col>{/* <Button variant="warning">return</Button> */}</Col>
-            <Col>
-              <Row>
-                <Button variant="outline-warning">review product</Button>
-              </Row>
-              <Row>
-                <Button variant="outline-danger">delete</Button>
-              </Row>
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
-      </Card>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            {/* <th>#</th> */}
+            <th>{t("Ship to")}</th>
+            <th>{t("Items Price")}</th>
+            <th>{t("Order status")}</th>
+            <th>{t("Shipping Info")}</th>
+            <th>{t("Total Price")}</th>
+            <th>{t("Email")}</th>
+            <th>{t("Action")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {/* <td>1</td> */}
+            <td>{item.name}</td>
+            <td>{item.itemsPrice}</td>
+            <td>{item.orderStatus}</td>
+            <td>
+              {t("address")}:{item.shippingInfo.address} <br />
+              {t("city")}:{item.shippingInfo.city} <br />
+              {t("phone")}:{item.shippingInfo.phoneNo} <br />
+            </td>
+            <td>{item.totalPrice}</td>
+            <td>{item.user.email}</td>
+            <td>
+              <button
+                className="btn btn-outline-danger"
+                disabled={
+                  item.orderStatus === "shipped" ||
+                  item.orderStatus === "delivered"
+                }
+                onClick={() => handleDelete(item._id)}
+              >
+                {" "}
+                {t("cancel")}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     </>
   );
 }

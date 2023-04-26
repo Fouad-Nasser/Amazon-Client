@@ -5,7 +5,8 @@
 
 #yourAddressAddressOrder{
     margin-top: 30px;
-    text-align: left;
+    text-align: center;
+    margin-bottom: 20px;
 }
 #addAddressPlusAccount{
     border: 2px dashed #C7C7C7;
@@ -37,5 +38,8 @@
     text-decoration: underline;
 
 }
-
+#EditLinkAccountAddress,#removeLinkAccountAddress{
+    margin-left: 5px;
+    margin-right: 5px;
+}
 

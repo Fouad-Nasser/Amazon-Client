@@ -17,11 +17,25 @@ import Profile from "./Pages/Account/profile/profile";
 import EditProfile from "./Pages/Account/profile/editProfile/editProfile";
 import ForgetPassword from "./Pages/Account/forgetPassword/forgetPassword";
 import OTP from "./Pages/Account/forgetPassword/OTP/OTP";
-
+import UpdatePasword from "./Pages/Account/updatePassword/updatePassword";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchUser } from "./Store/Actions/userActions";
 function App() {
+  const dispatch = useDispatch()
+  const { userInfo } = useSelector(state => state.user);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      dispatch(fetchUser(token))
+    }
+  }, [])
+  console.log(userInfo);
   return (
 
     <div className="App">
+
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -37,6 +51,7 @@ function App() {
         <Route path='/editProfile' element={<EditProfile />} />
         <Route path='/forgetPassword' element={<ForgetPassword />} />
         <Route path='/OTP' element={<OTP />} />
+        <Route path='/updatePassword' element={<UpdatePasword />} />
         <Route path='*' element={<Error />} />
       </Routes>
       <div className='footer__div'>

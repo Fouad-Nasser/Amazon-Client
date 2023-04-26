@@ -5,17 +5,19 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Address.css";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { t } from "i18next";
 
 function Address() {
   const [user, setUser] = useState([]);
+  const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users", {
+      .get(`http://localhost:8000/users/${userInfo?._id}`, {
         headers: {
           "content-type": "application/json",
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM2MmJlNDYzZjA3ZjE3OTYzNmJmZTYiLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWF0IjoxNjgxMzgyMDcyfQ.VRR-r6WGrCS_wTRgN4hmbhw7jYvxGCApDLFrW3GnU0c",
+          Authorization: localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -32,27 +34,22 @@ function Address() {
         <Row id="RowTitleOrder">
           <div>
             <Link id="LinkitleOrder" to={"/Account"}>
-              Your Account
+              {t("Your Account")}
             </Link>{" "}
-            {">"} <span id="spanTitleOrder"> Your Addresses</span>
+            {">"} <span id="spanTitleOrder"> {t("Your Addresses")}</span>
           </div>
         </Row>
 
         <Row>
-          <h2 id="yourAddressAddressOrder">Your Addresses</h2>
+          <h2 id="yourAddressAddressOrder">{t("Your Addresses")}</h2>
         </Row>
         <Row>
           <div className="col-4" style={{ height: "20rem" }}>
             <Link to={"/AddAddress"} id="LinkAccount">
-              <div
-                id="addAddressPlusAccount"
-                //   onClick={() => {
-                //     handleRouteToAddAddress();
-                //   }}
-              >
-                <i className="bi bi-plus" id="addressPlusIcon"></i>
+              <div id="addAddressPlusAccount">
+                <i class="bi bi-pencil-square" id="addressPlusIcon"></i>
                 <h3>
-                  <b>Add Address</b>
+                  <b>{t("Edit Address")}</b>
                 </h3>
               </div>
             </Link>
@@ -60,7 +57,7 @@ function Address() {
           <div className="col-4">
             <Card id="cardOfAddress">
               <Card.Header>
-                Default :
+                {t("Default")} :
                 <img
                   id="AddressCardImg"
                   src="https://thumbs.dreamstime.com/b/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"
@@ -69,28 +66,24 @@ function Address() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <div>
-                    <b id="nameOfUserStaticData">{user[3]?.name}</b>
+                    <b id="nameOfUserStaticData">{userInfo?.name}</b>
                   </div>
                   <div id="streetOfUserStaticData">
-                    street:
-                    {user[3]?.address.street}
+                    {t("street")}:{userInfo?.address.street}
                   </div>
                   <div id="bulidingOfUserStaticData">
-                    city:
-                    {user[3]?.address.city}
+                    {t("city")}:{userInfo?.address.city}
                   </div>
                   <div id="streetOfUserStaticData">
-                    postalCode:
-                    {user[3]?.address.postalCode}
+                    {t("postalCode")}:{userInfo?.address.postalCode}
                   </div>
                   <div id="PhoneOfUserStaticData">
-                    Phone number: {user[3]?.phone}
+                    {t("phone")}: {userInfo?.phone}
                   </div>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Link id="EditLinkAccountAddress">Edit</Link>
-
-                  <Link id="removeLinkAccountAddress">Remove</Link>
+                  <Link id="EditLinkAccountAddress">{t("Edit")}</Link>
+                  <Link id="removeLinkAccountAddress">{t("Remove")}</Link>
                 </ListGroup.Item>
               </ListGroup>
             </Card>
@@ -98,13 +91,15 @@ function Address() {
         </Row>
         <Row>
           <h5>
-            <b>Related</b>
+            <b>{t("Related")}</b>
           </h5>
         </Row>
         <Row>
-          <Link id="EditLinkAccountAddress">1-Click Settings</Link>
+          <Link id="EditLinkAccountAddress" to={"/account"}>
+            1-{t("Click Settings")}
+          </Link>
           <Link id="EditLinkAccountAddress" to={"/Order"}>
-            Change address on an open order
+            2-{t("Change address on")}
           </Link>
         </Row>
       </div>
