@@ -107,7 +107,7 @@ function Home() {
                 </div>
                 {/* Category Part 1 Res Done*/}
                 <div className="home__row">
-                    <Row xs={2} md={4} lg={4} sm={2} className='m-4'>
+                    <Row xs={1} md={2} lg={4} sm={2} className='m-4'>
                         {category.slice(0, 8).map((item) => (
                             <CardData item={item} />
                         ))}
@@ -132,7 +132,7 @@ function Home() {
                 </div>
                 {/* Category Part 2 Res Done*/}
                 <div>
-                    <Row xs={2} md={4} lg={4} sm={2} className='m-4' >
+                    <Row xs={1} md={2} lg={4} sm={2} className='m-4' >
                         {category.slice(8, 12).map((item) => (
                             <CardData item={item} />
                         ))}

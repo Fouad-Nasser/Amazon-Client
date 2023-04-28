@@ -26,11 +26,11 @@ function CardData({ item }) {
 
     return (
         <div>
-            <Card className='bg-white text-dark m-2 mb-4'>
+            <Card className='bg-white text-dark m-2 mb-4' style={{ height: '21rem' }}>
                 <Card.Body>
                     <Card.Title >{item.name}</Card.Title>
                     <NavLink>
-                        <Card.Img variant="top" src={item.image} className='img-fluid' />
+                        <Card.Img variant="top" src={item.image} className='img-fluid' style={{ height: '15rem' }} />
                     </NavLink>
                     <NavLink className='mt-1 text-decoration-none '>
                         <div className=''>

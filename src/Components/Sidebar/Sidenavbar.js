@@ -27,7 +27,7 @@ function Sidenavbar(props) {
 
     const currentLanguageCode = localStorage.getItem('i18nextLng') || 'en'
     const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     useEffect(() => {
         document.body.dir = currentLanguage.dir || 'ltr'
     }, [currentLanguage, t])
@@ -56,15 +56,22 @@ function Sidenavbar(props) {
     }
     const SubCategory = (id) => {
         console.log(id);
-        axios.get(`http://localhost:3000/subCategorys?category=${id}`).then((res) => {
-            console.log(res);
-            setSubCategory(res.data.data)
+        axios.get(`http://localhost:3000/subCategorys?category=${id}`,
+            {
+                headers: {
+                    'content-type': 'application/json',
+                    'lang': currentLanguageCode
+                }
+            }
+        ).then(res => {
+            console.log(res.data.data);
+            const category = res.data.data;
+            setSubCategory(category)
             setFalg(true)
         }).catch((err) => {
             console.log(err);
         })
     }
-    console.log(subcategory);
     const categoryDataPart1 = catdata.slice(0, 4).map((item) => {
         return (
             <>
