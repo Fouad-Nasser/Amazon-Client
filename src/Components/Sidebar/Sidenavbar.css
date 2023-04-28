@@ -19,6 +19,11 @@
     transform-origin: left center;
     transform: translateX(-420px);
 }
+  body[dir='rtl'] .sidenav {
+    right: 0;
+    transform-origin: right center;
+    transform: translateX(0px) !important;
+  }
  /*General fade into existence*/
  .All_overlay {
   position: fixed;
@@ -34,8 +39,12 @@
   color: white;
   font-weight: bold;
   background-color: rgb(35, 47, 62);
-  padding: 10px 0px 10px 30px;
+  padding: 10px 20px 10px 30px;
   font-size: 23px;
+}
+.titlesidecontentHeader{
+  margin-right: 22px;
+  /* padding: 10px 20px 10px 30px; */
 }
 .sideNavContainer{
   position: absolute;
@@ -131,6 +140,19 @@
 .sub-header i {
   color: #8e9090;
 }
+#mainMenu {
+  font-weight: bold;
+  color: #111111;
+  padding-left: 21px;
+  padding-top: 15px;
+}
+
+#mainMenu:hover {
+  background-color: #eaeded;
+  cursor: pointer;
+}
+
+
 /*Animations*/
 /*Expand the entire sidenav outwards*/
 @keyframes moveSideBar {
@@ -151,18 +173,17 @@
       opacity: 1;
     }
   }
-
   /*Open and close drop down*/
-@keyframes dropDown {
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
+  @keyframes dropDown {
+    0% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
   }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-}
 /*Move sub container*/
 @keyframes moveSubContainer {
   0% {

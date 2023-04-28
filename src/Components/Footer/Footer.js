@@ -1,10 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Footer.css'
 import { NavLink } from 'react-router-dom'
 import { Button, Row } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next';
 
+const languages = [
+    {
+        code: 'en',
+        name: 'English',
+        country_code: 'us',
+    },
+    {
+        code: 'ar',
+        name: 'العربية',
+        dir: 'rtl',
+        country_code: 'eg',
+    },
+]
 function Footer() {
     const [visible, setVisible] = useState(false)
+
+    const currentLanguageCode = localStorage.getItem('i18nextLng') || 'en'
+    const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
+    const { t, i18n } = useTranslation();
+    useEffect(() => {
+        document.body.dir = currentLanguage.dir || 'ltr'
+    }, [currentLanguage, t])
 
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
@@ -29,47 +50,46 @@ function Footer() {
                 {/* Part SignUp */}
                 <NavLink className='text-decoration-none'>
                     <div>
-                        <span onClick={scrollToTop} className='btn_top'>Back to top</span>
+                        <span onClick={scrollToTop} className='btn_top'>{t('Backtotop')}</span>
                     </div>
                 </NavLink>
+
                 <div className="container p-4">
                     <div className="row">
                         <Row xs={4} md={4} sm={4}>
                             <div className="col-lg-3 col-md-3 col-xs-6 mb-4 mb-md-0">
-                                <div className="text-bold titel">Get to Know Us</div>
+                                <div className="text-bold titel">{t('GettoKnowUs')}</div>
                                 <ul className="list-unstyled">
-                                    <NavLink to='/AboutUs' className="sub_title text-decoration-none "><li>About Amazon</li> </NavLink>
-                                    <NavLink to='/Careers' className="sub_title text-decoration-none"><li>Careers</li></NavLink>
-                                    <NavLink to='/Amazon_Science' className="sub_title text-decoration-none"><li>Amazon Science</li></NavLink>
+                                    <NavLink to='/AboutUs' className="sub_title text-decoration-none "><li>{t('AboutAmazon')}</li> </NavLink>
+                                    <NavLink to='/Careers' className="sub_title text-decoration-none"><li> {t('Careers')}</li></NavLink>
+                                    <NavLink to='/Amazon_Science' className="sub_title text-decoration-none"><li>  {t('AmazonScience')}</li></NavLink>
                                 </ul >
                             </div >
                             <div className="col-lg-3 col-md-3 col-xs-6 mb-4 mb-md-0">
-                                <div className="text-bold titel">Shop with Us</div>
+                                <div className="text-bold titel">{t('ShopwithUs')}</div>
                                 <ul className="list-unstyled ">
-                                    <NavLink to='/Account' className="sub_title text-decoration-none"><li>Your Account</li></NavLink>
-                                    <NavLink to='/Order' className="sub_title text-decoration-none"><li>Your Orders</li></NavLink>
-                                    <NavLink to='/Address' className="sub_title text-decoration-none"><li>Your Addresses</li></NavLink>
-                                    <NavLink to='/List' className="sub_title text-decoration-none"><li>Your Lists</li></NavLink>
+                                    <NavLink to='/Account' className="sub_title text-decoration-none"><li>{t('YourAccount')}</li></NavLink>
+                                    <NavLink to='/Order' className="sub_title text-decoration-none"><li>{t('YourOrders')}</li></NavLink>
+                                    <NavLink to='/Address' className="sub_title text-decoration-none"><li>{t('Address')}</li></NavLink>
+                                    <NavLink to='/List' className="sub_title text-decoration-none"><li>{t('YourLists')}</li></NavLink>
                                 </ul >
                             </div >
                             <div className="col-lg-3 col-md-3 col-xs-6 mb-4 mb-md-0">
-                                <div className="text-bold titel">Shop with Us</div>
+                                <div className="text-bold titel">{t('MakeMoneywithUs')}</div>
                                 <ul className="list-unstyled ">
-                                    <NavLink to='/Money' className="sub_title text-decoration-none"><li>Make Money with Us</li></NavLink>
-                                    <NavLink to='/' className="sub_title text-decoration-none"><li>Protect and build your brand</li></NavLink>
-                                    <NavLink to='/Address' className="sub_title text-decoration-none"><li>Advertise Your Products</li></NavLink>
-                                    <NavLink to='/sell' className="sub_title text-decoration-none"><li>Sell on Amazon</li></NavLink>
-                                    <NavLink to='/' className="sub_title text-decoration-none"><li>Fulfillment by Amazon </li></NavLink>
+                                    <NavLink to='/' className="sub_title text-decoration-none"><li>{t('Protectandbuildyourbrand')}</li></NavLink>
+                                    <NavLink to='/Address' className="sub_title text-decoration-none"><li>{t('AdvertiseYourProducts')}</li></NavLink>
+                                    <NavLink to='/sell' className="sub_title text-decoration-none"><li>{t('SellonAmazon')}</li></NavLink>
+                                    <NavLink to='/' className="sub_title text-decoration-none"><li>{t('FulfillmentbyAmazon')} </li></NavLink>
                                 </ul >
                             </div >
                             <div className="col-lg-3 col-md-3 col-xs-6 mb-4 mb-md-0">
-                                <div className="text-bold titel">Shop with Us</div>
+                                <div className="text-bold titel">{t('LetUsHelpYou')}</div>
                                 <ul className="list-unstyled ">
-                                    <NavLink to='/' className="sub_title text-decoration-none"><li>Let Us Help You</li></NavLink>
-                                    <NavLink to='/Help' className="sub_title text-decoration-none"><li>Help</li></NavLink>
-                                    <NavLink to='/Delivery' className="sub_title text-decoration-none"><li>Shipping & Delivery</li></NavLink>
-                                    <NavLink to='/' className="sub_title text-decoration-none"><li> Returns & Replacements</li></NavLink>
-                                    <NavLink to='/' className="sub_title text-decoration-none"><li>Amazon App Download </li></NavLink>
+                                    <NavLink to='/Help' className="sub_title text-decoration-none"><li>{t('Help')}</li></NavLink>
+                                    <NavLink to='/Delivery' className="sub_title text-decoration-none"><li>{t('Shipping&Delivery')}</li></NavLink>
+                                    <NavLink to='/' className="sub_title text-decoration-none"><li> {t('Returns&Replacements')}</li></NavLink>
+                                    <NavLink to='/' className="sub_title text-decoration-none"><li>{t('AmazonAppDownload')} </li></NavLink>
                                 </ul >
                             </div >
                         </Row>
@@ -83,16 +103,16 @@ function Footer() {
                         <div class="text-center ">
                             <ul className='list-unstyled ul_footer'>
                                 <NavLink to="/" className="text-white text-decoration-none">
-                                    <li> Conditions of Use & Sale</li>
+                                    <li>{t('ConditionsofUse')}</li>
                                 </NavLink>
                                 <NavLink to="/" className="text-white text-decoration-none">
-                                    <li>Privacy Notice</li>
+                                    <li>{t('PrivacyNotice')}</li>
                                 </NavLink>
                                 <NavLink to="/" className="text-white text-decoration-none">
-                                    <li class="nav_last"> Interest-Based Ads</li>
+                                    <li class="nav_last">{t('Interest-BasedAds')}</li>
                                 </NavLink>
                             </ul>
-                            <span>©1996–2023, Amazon.com, Inc. or its affiliates</span>
+                            <span>{t('itsaffiliates')}</span>
                         </div>
                     </div>
                 </div>

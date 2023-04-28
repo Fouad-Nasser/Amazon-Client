@@ -11,7 +11,6 @@ import Order from "./Pages/Order/Order";
 
 import ProductDetalis from './Pages/Product_Detalis/product_detalis';
 import Cart from './Pages/Cart/cart';
-import OverlayAll from "./Components/overlayAll";
 
 function App() {
   return (

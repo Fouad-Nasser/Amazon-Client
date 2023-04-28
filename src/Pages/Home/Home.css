@@ -19,7 +19,7 @@
   .home__row {  
     display: flex;
     z-index: 1;
-    margin-top: 22rem;
+    margin-top: 20rem;
   }
   .backgroundData{
     background: rgb(203, 203, 203);
@@ -44,7 +44,7 @@
   .card_title{
     font-size: 23px;
     /* font-weight: bold; */
-    text-align: left;
+    /* text-align: left; */
     margin-left: 8px;
   }
   /* footer */

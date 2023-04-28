@@ -1,28 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './Slider.css';
-
+import { useTranslation } from 'react-i18next';
+const languages = [
+    {
+        code: 'en',
+        name: 'English',
+        country_code: 'us',
+    },
+    {
+        code: 'ar',
+        name: 'العربية',
+        dir: 'rtl',
+        country_code: 'eg',
+    },
+]
 const SliderCategory = ({ categoryID, flag }) => {
     // console.log(categoryID, " ", flag);
     const [product, setProduct] = useState([]);
 
+    const currentLanguageCode = localStorage.getItem('i18nextLng') || 'en'
+    const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
+    const { t, i18n } = useTranslation();
     useEffect(() => {
-        axios.get(`http://localhost:3000/products?categoryID=${categoryID}`).then((res) => {
-            // console.log(res.data.data);
-            setProduct(res.data.data)
+        document.body.dir = currentLanguage.dir || 'ltr'
+    }, [currentLanguage, t])
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/products?categoryID=${categoryID}`,
+            {
+                headers: {
+                    'content-type': 'application/json',
+                    'lang': currentLanguageCode
+                }
+            }
+        ).then(res => {
+            const category = res.data.data;
+            console.log(category);
+            setProduct(category)
         }).catch((err) => {
             console.log(err);
         })
-    })
+    }, [currentLanguageCode]);
+
     const CheckSlider = product.map((item) => (
         (flag === false && < SwiperSlide key={item.id} >
             <span className='a-list-item-slider'>
                 <NavLink to="/">
-                    <img className='img-responsive' src={item.images}  />
+                    <img className='img-responsive' src={item.images} />
                 </NavLink>
             </span>
         </SwiperSlide >) ||
@@ -68,34 +97,74 @@ const SliderCategory = ({ categoryID, flag }) => {
         )
     ));
     return (
-        <Swiper
-            modules={[Navigation]}
-            spaceBetween={50}
-            slidesPerView={1}
-            navigation
-            breakpoints={
+        <div>
+            <>
                 {
-                    576: {
-                        slidesPerView: 3,
-                    },
-                    // when window width is >= 768px
-                    768: {
-                        slidesPerView: 4,
-                    },
-                    // when window width is >= 1024px
-                    1024: {
-                        spaceBetween: 10,
-                        slidesPerView: 4,
-                    },
-                    1280: {
-                        slidesPerGroup: 2,
-                        slidesPerView: 5,
-                    },
+                    currentLanguage.code === 'en' ? <>
+                        <Swiper
+                            modules={[Navigation]}
+                            spaceBetween={50}
+                            slidesPerView={1}
+                            navigation
+                            breakpoints={
+                                {
+                                    576: {
+                                        slidesPerView: 3,
+                                    },
+                                    // when window width is >= 768px
+                                    768: {
+                                        slidesPerView: 4,
+                                    },
+                                    // when window width is >= 1024px
+                                    1024: {
+                                        spaceBetween: 10,
+                                        slidesPerView: 4,
+                                    },
+                                    1280: {
+                                        slidesPerGroup: 2,
+                                        slidesPerView: 5,
+                                    },
+                                }
+                            }
+                        >
+                            {CheckSlider}
+                        </Swiper >
+                    </>
+                        : <>
+                            <Swiper
+                                dir="rtl"
+                                modules={[Navigation]}
+                                spaceBetween={50}
+                                slidesPerView={1}
+                                navigation
+                                className="mySwiper"
+                                breakpoints={
+                                    {
+                                        576: {
+                                            slidesPerView: 3,
+                                        },
+                                        // when window width is >= 768px
+                                        768: {
+                                            slidesPerView: 4,
+                                        },
+                                        // when window width is >= 1024px
+                                        1024: {
+                                            spaceBetween: 10,
+                                            slidesPerView: 4,
+                                        },
+                                        1280: {
+                                            slidesPerGroup: 2,
+                                            slidesPerView: 5,
+                                        },
+                                    }
+                                }
+                            >
+                                {CheckSlider}
+                            </Swiper>
+                        </>
                 }
-            }
-        >
-            {CheckSlider}
-        </Swiper>
+            </>
+        </div>
     );
 }
 export default SliderCategory

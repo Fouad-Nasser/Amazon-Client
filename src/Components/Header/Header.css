@@ -11,20 +11,11 @@
 	background: black;
 }
 
-#container {
-	display: flex;
-	height: 6rem;
-	width: auto; 
-	font-size: 1rem;
-	background: var(--main-header-bg);
-	/* background: var(--main-header-bg); */
-}
-
-#nav-bar {
-	display: flex;
+/* #nav-bar {
+	display: flex; 
 	flex-flow: column nowrap;
 	flex: 1;
-}
+} */
 
 #nav-belt {
 	display: flex;
@@ -183,7 +174,7 @@
 	outline: none;
 } 
 
-#nav-search-bar-form .nav-right {
+#nav-search-bar-form #nav-right {
 	box-sizing: border-box;
 	display: flex;
 	background: #cd9042;
@@ -213,8 +204,9 @@
 
 #nav-tools {
 	display: flex;
-	flex: 1 1 auto;
-	padding: 0.5rem 2.5rem 0.5rem 0;
+	flex: auto; 
+	padding-left: 1.5em;
+    padding-right: 1em;
 }
 
 .header__optionLineOne {
@@ -277,7 +269,8 @@ top:1px;
 	margin-top: -0.3rem;
 	color: #e77600;
 	font-weight: bolder;
-	margin-left: 1rem;
+    margin-left: 1.1rem;
+    margin-right: 0.9rem;
 }
 
 #hrSignIn{
@@ -293,7 +286,7 @@ top:1px;
 }
 
 #ColNav , #Col_ALL{
-  text-align: left;
+  text-align: center;
   margin-left: 9px;
 }
 
@@ -334,6 +327,11 @@ top:1px;
 	transform: translateY(-5px);
 	z-index: 75;
   }
+  body[dir='rtl'] .All_closeBtn {
+	right: 0;
+	margin-right: 390px;
+	transform: translateY(-5px);
+  }
 
   /****************input search box ***************/
 .inputsearch{
@@ -362,4 +360,22 @@ top:1px;
     outline:none;
     padding:0px 5px;
     font-size: 18px;
+}
+
+@media only screen and (max-width: 710px) and (min-width: 200px) {
+	.nav-fill,#nav-search{
+		display: none !important;
+		
+	}
+	
+}
+@media only screen and (max-width: 460px) and (min-width: 200px) {
+    .hideDatainResp{
+        display: none !important;
+    }
+}
+@media only screen and (max-width: 280px){
+    .hideRes280data{
+        display: none !important;
+    }
 }
