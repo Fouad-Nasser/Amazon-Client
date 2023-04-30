@@ -7,10 +7,13 @@ import OrderCard from "../../Components/OrderCard/OrderCard";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { t } from "i18next";
+import Pagination from "react-bootstrap/Pagination";
 import { useTranslation } from "react-i18next";
 const Order = () => {
   const { userInfo } = useSelector((state) => state.user);
   const { t, i18n } = useTranslation();
+  const [numOfPage, setNumOfPage] = useState(0);
+  const limit = 4;
   var data = [
     {
       key: "toys",
@@ -46,15 +49,43 @@ const Order = () => {
     },
   ];
   const [order, setOrder] = useState([]);
+
   var [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/orders?user=6416d0c1792b554cdcf54953`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
+      .get(
+        `http://localhost:8000/orders?user=6416d0c1792b554cdcf54953&page=${page}&limit=${limit}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setOrder(res.data.data);
+        setNumOfPage(res.data.paginationResult.numberOfPages);
+        console.log(numOfPage);
+        setCount(res.data.documentsCounts);
       })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const handleNext = () => {
+    setPage(page + 1);
+    axios
+      .get(
+        `http://localhost:8000/orders?user=6416d0c1792b554cdcf54953&page=${page}&limit=${limit}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data.data);
         setOrder(res.data.data);
@@ -63,7 +94,28 @@ const Order = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+  const handlePrev = () => {
+    setPage(page - 1);
+    axios
+      .get(
+        `http://localhost:8000/orders?user=6416d0c1792b554cdcf54953&page=${page}&limit=${limit}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        setOrder(res.data.data);
+        setCount(res.data.documentsCounts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="container">
@@ -140,6 +192,17 @@ const Order = () => {
                         <OrderCard item={item} />
                       ))}
                     </Row>
+                  </div>
+                  <div className="pag">
+                    <div>
+                      <Pagination>
+                        <Pagination.First />
+                        <Pagination.Next onClick={handleNext} />
+                        <Pagination.Item>{page}</Pagination.Item>
+                        <Pagination.Prev onClick={handlePrev} />
+                        <Pagination.Last />
+                      </Pagination>
+                    </div>
                   </div>
                   {/* <Table striped bordered hover variant="warning">
                     <thead>

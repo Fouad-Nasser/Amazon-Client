@@ -135,5 +135,19 @@
   "Office (delivery from Sun-Thu)": "Office (delivery from Sun-Thu)",
   "Friday": "Friday",
   "Saturday": "Satrday",
-  "Is your office open on weekends?": "Is your office open on weekends?"
+  "Is your office open on weekends?": "Is your office open on weekends?",
+  "Login & security": "Login & security",
+  "Change Password": "Change Password",
+  "Use the form below": "Use the form below to change password for your Amazon Account",
+  "Save changes": "Save changes",
+  "Reenter new Password": "Reenter new Password",
+  "Remember ur pasword": "Remember ur pasword",
+  "Enter the new password": "Enter the new password",
+  "to reset ur password": "to reset ur password u must ",
+  "enter pas and confPas": "enter the new password and reEnter the new password",
+  "Enter your name": "Enter your name",
+  "Enter your email": "Enter your email",
+  "Enter your phone": "Enter your phone",
+  "Enter your password": "Enter your password",
+  "reEnter your password": "reEnter your password"
 }

@@ -39,7 +39,7 @@ const Header = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/categorys")
+      .get("http://localhost:8000/categorys")
       .then((res) => {
         console.log(res.data.data);
         setCategory(res.data.data);

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { Button, Card, Row } from "react-bootstrap";
+import { Alert, Button, Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./updatePassword.css";
 import Input from "../../../Components/Input/Input";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 const UpdatePasword = () => {
   const [values, setValues] = useState({
     password: "",
     newPassword: "",
     confirmNewPassword: "",
   });
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
+  const [err, setErr] = useState(null);
+  const { t, i18n } = useTranslation();
   const handleUpatePassword = () => {
     axios
       .put(
@@ -26,7 +25,7 @@ const UpdatePasword = () => {
         {
           headers: {
             "content-type": "application/json",
-            Authorization: localStorage.getItem("Token"),
+            Authorization: localStorage.getItem("token"),
           },
         }
       )
@@ -35,7 +34,8 @@ const UpdatePasword = () => {
         alert("password updated succefully");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.error);
+        setErr(err.response.data.error);
       });
   };
   const inputs = [
@@ -77,52 +77,31 @@ const UpdatePasword = () => {
   };
   return (
     <>
+      {/* <Alert key="danger" variant="danger">
+        {err}
+      </Alert> */}
       <div className="container" id="containerAddressAccount">
         <Row id="RowTitleOrder">
           <div>
             <Link id="LinkitleOrder" to={"/Account"}>
-              Your Account
+              {t("Your Account")}
             </Link>{" "}
             {">"}
             <Link id="LinkitleOrder" to={"/signin"}>
-              Login & security
+              {t("Login & security")}
             </Link>{" "}
             {">"}
-            <span id="spanTitleOrder"> Change Password</span>
+            <span id="spanTitleOrder">{t("Change Password")}</span>
           </div>
         </Row>
         <Row>
-          <h2>Change Password</h2>
+          <h2>{t("Change Password")}</h2>
         </Row>
         <Card id="cardUpdatePassword">
           <Card.Title>
-            <p>Use the form below to change password for your Amazon Account</p>
+            <p>{t("Use the form below")}</p>
           </Card.Title>
           <Card.Body>
-            {/* <div>
-              <label htmlFor="currentPassword">
-                <b>Current Password:</b>
-              </label>
-              <div className="mb-3">
-                <input type="text" id="currentPassword" />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="NewPassword">
-                <b>New Password:</b>
-              </label>
-              <div className="mb-3">
-                <input type="text" id="NewPassword" />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="reenterNewPassword">
-                <b>Reenter New Password:</b>
-              </label>
-              <div className="mb-3">
-                <input type="text" id="reenterNewPassword" />
-              </div>
-            </div> */}
             {inputs.map((input) => (
               <Input
                 key={input.id}
@@ -138,7 +117,7 @@ const UpdatePasword = () => {
                 id="buttonUpdatePassword"
                 onClick={handleUpatePassword}
               >
-                Save changes
+                {t("Save changes")}
               </Button>
             </div>
           </Card.Body>
