@@ -73,48 +73,12 @@ const Order = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [page]);
   const handleNext = () => {
     setPage(page + 1);
-    axios
-      .get(
-        `http://localhost:8000/orders?user=6416d0c1792b554cdcf54953&page=${page}&limit=${limit}`,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data.data);
-        setOrder(res.data.data);
-        setCount(res.data.documentsCounts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   const handlePrev = () => {
     setPage(page - 1);
-    axios
-      .get(
-        `http://localhost:8000/orders?user=6416d0c1792b554cdcf54953&page=${page}&limit=${limit}`,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data.data);
-        setOrder(res.data.data);
-        setCount(res.data.documentsCounts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   return (
     <>
@@ -197,9 +161,16 @@ const Order = () => {
                     <div>
                       <Pagination>
                         <Pagination.First />
-                        <Pagination.Next onClick={handleNext} />
+                        <Pagination.Prev
+                          onClick={handlePrev}
+                          disabled={page <= 1}
+                        />
                         <Pagination.Item>{page}</Pagination.Item>
-                        <Pagination.Prev onClick={handlePrev} />
+                        <Pagination.Next
+                          onClick={handleNext}
+                          disabled={page >= numOfPage}
+                        />
+
                         <Pagination.Last />
                       </Pagination>
                     </div>

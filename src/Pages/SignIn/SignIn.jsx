@@ -97,13 +97,15 @@ const SignIn = () => {
   const [show, setShow] = useState(false);
   return (
     <div class="text-center">
-      <Row>
-        <Col md={{ span: 3, offset: 8 }}>
-          <Alert key="success" variant="success">
-            {successMessage}
-          </Alert>
-        </Col>
-      </Row>
+      {successMessage && (
+        <Row>
+          <Col md={{ span: 3, offset: 8 }}>
+            <Alert key="success" variant="success">
+              {successMessage}
+            </Alert>
+          </Col>
+        </Row>
+      )}
       <div className="register">
         <img
           id="CreateAccountContinueImg2"

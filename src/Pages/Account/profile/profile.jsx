@@ -54,7 +54,7 @@ function Profile() {
                 className="row title"
                 onClick={handleNavigationToEditProfile}
               >
-                <div className="col-10">{user?.name}</div>
+                <div className="col-10">{userInfo?.name}</div>
                 <div className="col">
                   <b>
                     <i class="bi bi-chevron-right"></i>

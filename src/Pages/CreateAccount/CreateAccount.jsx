@@ -57,7 +57,7 @@ const CreateAccount = () => {
       .catch((err) => {
         console.log(err);
         setIsButtonDisabled(true);
-        setErrMessage(err.response.data.message);
+        setErrMessage(err.response.data.errors[0].msg);
         setTimeout(() => {
           setIsButtonDisabled(false);
         }, 3000);
@@ -109,13 +109,15 @@ const CreateAccount = () => {
     <>
       {currentDiv === 1 && (
         <div>
-          <Row>
-            <Col md={{ span: 3, offset: 8 }}>
-              <Alert key="success" variant="success">
-                {successMessage}
-              </Alert>
-            </Col>
-          </Row>
+          {successMessage && (
+            <Row>
+              <Col md={{ span: 3, offset: 8 }}>
+                <Alert key="success" variant="success">
+                  {successMessage}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -138,7 +140,6 @@ const CreateAccount = () => {
                       ref={name}
                       id="name"
                     />
-                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
@@ -152,7 +153,6 @@ const CreateAccount = () => {
                       ref={email}
                       id="email"
                     />
-                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
@@ -166,7 +166,7 @@ const CreateAccount = () => {
                       ref={phone}
                       id="phone"
                     />
-                    <small id="smallErr">{errMessage}</small>
+                    <small id="delevery">it may help the delevery guy*</small>
                   </div>
                 </div>
                 <div>
@@ -180,7 +180,6 @@ const CreateAccount = () => {
                       className="form-control"
                       ref={password}
                     />
-                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
@@ -194,7 +193,6 @@ const CreateAccount = () => {
                       className="form-control"
                       ref={confirmPassword}
                     />
-                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
 
@@ -211,6 +209,7 @@ const CreateAccount = () => {
                 >
                   {t("Continue")}
                 </Button>
+                <small id="smallErr">{errMessage}</small>
                 <div className="row" id="CreateAccountContinueTerms">
                   <p>
                     <br />
@@ -237,13 +236,15 @@ const CreateAccount = () => {
       )}
       {currentDiv === 2 && (
         <div>
-          <Row>
-            <Col md={{ span: 3, offset: 8 }}>
-              <Alert key="success" variant="success">
-                {successMessage}
-              </Alert>
-            </Col>
-          </Row>
+          {successMessage && (
+            <Row>
+              <Col md={{ span: 3, offset: 8 }}>
+                <Alert key="success" variant="success">
+                  {successMessage}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <div className="register">
             <img
               id="CreateAccountContinueImg2"

@@ -35,7 +35,7 @@ function OrderCard({ item }) {
             <th>{t("Order status")}</th>
             <th>{t("Shipping Info")}</th>
             <th>{t("Total Price")}</th>
-            <th>{t("Email")}</th>
+            <th>{t("payment status")}</th>
             <th>{t("Action")}</th>
           </tr>
         </thead>
@@ -51,13 +51,14 @@ function OrderCard({ item }) {
               {t("phone")}:{item.shippingInfo.phoneNo} <br />
             </td>
             <td>{item.totalPrice}</td>
-            <td>{item.user.email}</td>
+            <td>{item.isPaid ? "paid" : "not paid"}</td>
             <td>
               <button
                 className="btn btn-outline-danger"
                 disabled={
                   item.orderStatus === "shipped" ||
-                  item.orderStatus === "delivered"
+                  item.orderStatus === "delivered" ||
+                  item.isPaid == true
                 }
                 onClick={() => handleDelete(item._id)}
               >

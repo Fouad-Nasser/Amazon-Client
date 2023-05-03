@@ -93,13 +93,15 @@ const UpdatePasword = () => {
   };
   return (
     <>
-      <Row>
-        <Col md={{ span: 3, offset: 8 }}>
-          <Alert key="success" variant="success">
-            {successMessage}
-          </Alert>
-        </Col>
-      </Row>
+      {successMessage && (
+        <Row>
+          <Col md={{ span: 3, offset: 8 }}>
+            <Alert key="success" variant="success">
+              {successMessage}
+            </Alert>
+          </Col>
+        </Row>
+      )}
       {/* <Alert key="danger" variant="danger">
         {err}
       </Alert> */}

@@ -14,7 +14,6 @@ const ForgetPassword = () => {
   const showDiv3 = () => setCurrentDiv(3);
   const [emailVal, setEmailVal] = useState("");
   const [errMessage, setErrMessage] = useState("");
-  const [errMessage2, setErrMessage2] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { t, i18n } = useTranslation();
@@ -129,15 +128,13 @@ const ForgetPassword = () => {
       .catch((err) => {
         console.log(err);
         setIsButtonDisabled(true);
-        setErrMessage(err.response.data.errors[1].msg);
-        setErrMessage2(err.response.data.errors[0].msg);
+        setErrMessage(err.response.data.errors[0].msg);
         // setErrMessage(err.response.data.msg);
         setTimeout(() => {
           setIsButtonDisabled(false);
         }, 3000);
         setTimeout(() => {
           setErrMessage("");
-          setErrMessage2("");
         }, 3000);
       });
   };
@@ -175,13 +172,15 @@ const ForgetPassword = () => {
     <>
       {currentDiv === 1 && (
         <div>
-          <Row>
-            <Col md={{ span: 3, offset: 8 }}>
-              <Alert key="success" variant="success">
-                {successMessage}
-              </Alert>
-            </Col>
-          </Row>
+          {successMessage && (
+            <Row>
+              <Col md={{ span: 3, offset: 8 }}>
+                <Alert key="success" variant="success">
+                  {successMessage}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -244,13 +243,15 @@ const ForgetPassword = () => {
       )}
       {currentDiv === 2 && (
         <div>
-          <Row disabled>
-            <Col md={{ span: 3, offset: 8 }}>
-              <Alert key="success" variant="success">
-                {successMessage}
-              </Alert>
-            </Col>
-          </Row>
+          {successMessage && (
+            <Row>
+              <Col md={{ span: 3, offset: 8 }}>
+                <Alert key="success" variant="success">
+                  {successMessage}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -330,13 +331,15 @@ const ForgetPassword = () => {
       )}
       {currentDiv === 3 && (
         <div>
-          <Row disabled>
-            <Col md={{ span: 3, offset: 8 }}>
-              <Alert key="success" variant="success">
-                {successMessage}
-              </Alert>
-            </Col>
-          </Row>
+          {successMessage && (
+            <Row>
+              <Col md={{ span: 3, offset: 8 }}>
+                <Alert key="success" variant="success">
+                  {successMessage}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -379,7 +382,6 @@ const ForgetPassword = () => {
                         className="form-control"
                         ref={confirmNewPassword}
                       />
-                      <small id="smallErr">{errMessage2}</small>
                     </div>
                   </div>
                   <Button
