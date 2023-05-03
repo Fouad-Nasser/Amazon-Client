@@ -10,7 +10,9 @@
     /* padding: 0px 100px; */
     border-radius: 10px;
   }
-  
+  #lableCreateAcc{
+    font-size: x-small;
+  }
   h1 {
     color: #ab3518;
     text-align: center;

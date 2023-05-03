@@ -8,6 +8,8 @@
  #SignIn{
     border: 1px solid gray;
     border-radius: 10px;
+    width: 100%;
+      width: 400px;
 
  } 
  /* ,"newPassword":"123123123","confirmNewPassword":"123123123" */

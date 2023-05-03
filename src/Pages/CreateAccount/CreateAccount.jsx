@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Button, Card } from "react-bootstrap";
+import { Accordion, Alert, Button, Card, Col, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import "./CreateAccount.css";
@@ -20,8 +20,13 @@ const CreateAccount = () => {
   const password = useRef();
   const confirmPassword = useRef();
   const verifyEmailCode = useRef();
-
-  const createAccount = () => {
+  const [errMessage, setErrMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const navigate = useNavigate();
+  const createAccount2 = () => {
+    setIsButtonDisabled(true);
+    // make the API call here
     axios
       .post(
         `http://localhost:8000/users/register`,
@@ -39,15 +44,31 @@ const CreateAccount = () => {
         }
       )
       .then((res) => {
-        console.log(res.data.data);
-        alert("check your email address to activate your account");
+        console.log(res.data);
+        setSuccessMessage("please check your email to verify your new email");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
+
+        setIsButtonDisabled(false);
+        showDiv2();
+        // navigate("/OTP");
       })
       .catch((err) => {
-        alert(err.message);
         console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.message);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 3000);
       });
   };
   const handleVerifyEmail = () => {
+    setIsButtonDisabled(true);
+    // make the API call here
     axios
       .post(
         "http://localhost:8000/users/verify_email",
@@ -63,11 +84,24 @@ const CreateAccount = () => {
       )
       .then((res) => {
         console.log(res.data);
-        alert("Email verified successfully");
+        setSuccessMessage("Email is verified succefully please signIn again");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 7000);
+
+        setIsButtonDisabled(false);
+        showDiv3();
       })
       .catch((err) => {
-        alert(err.message);
         console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.message);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 3000);
       });
   };
 
@@ -75,6 +109,13 @@ const CreateAccount = () => {
     <>
       {currentDiv === 1 && (
         <div>
+          <Row>
+            <Col md={{ span: 3, offset: 8 }}>
+              <Alert key="success" variant="success">
+                {successMessage}
+              </Alert>
+            </Col>
+          </Row>
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -87,7 +128,9 @@ const CreateAccount = () => {
               <form>
                 <h3 id="CreateAccountContinueTitle">{t("Create account")}</h3>
                 <div>
-                  <label htmlFor="name">{t("Enter your name")}</label>
+                  <label htmlFor="name" id="lableCreateAcc">
+                    {t("Enter your name")}
+                  </label>
                   <div>
                     <input
                       type="text"
@@ -95,10 +138,13 @@ const CreateAccount = () => {
                       ref={name}
                       id="name"
                     />
+                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email">{t("Enter your email")}</label>
+                  <label htmlFor="email" id="lableCreateAcc">
+                    {t("Enter your email")}
+                  </label>
                   <div>
                     <input
                       type="text"
@@ -106,10 +152,13 @@ const CreateAccount = () => {
                       ref={email}
                       id="email"
                     />
+                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="phone">{t("Enter your phone")}</label>
+                  <label htmlFor="phone" id="lableCreateAcc">
+                    {t("Enter your phone")}
+                  </label>
                   <div>
                     <input
                       type="text"
@@ -117,10 +166,13 @@ const CreateAccount = () => {
                       ref={phone}
                       id="phone"
                     />
+                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="password">{t("Enter your password")}</label>
+                  <label htmlFor="password" id="lableCreateAcc">
+                    {t("Enter your password")}
+                  </label>
                   <div>
                     <input
                       id="password"
@@ -128,10 +180,11 @@ const CreateAccount = () => {
                       className="form-control"
                       ref={password}
                     />
+                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="confirmPassword">
+                  <label htmlFor="confirmPassword" id="lableCreateAcc">
                     {t("reEnter your password")}
                   </label>
                   <div>
@@ -141,22 +194,23 @@ const CreateAccount = () => {
                       className="form-control"
                       ref={confirmPassword}
                     />
+                    <small id="smallErr">{errMessage}</small>
                   </div>
                 </div>
 
-                <button
+                <Button
                   type="submit"
                   class="myButton mb-3"
                   id="CreateAccountContinueButton"
+                  variant="warning"
+                  disabled={isButtonDisabled}
                   onClick={() => {
-                    createAccount();
-                    handleVerifyEmail();
-                    showDiv2();
+                    createAccount2();
                     setEmailVal(email?.current?.value);
                   }}
                 >
                   {t("Continue")}
-                </button>
+                </Button>
                 <div className="row" id="CreateAccountContinueTerms">
                   <p>
                     <br />
@@ -183,6 +237,13 @@ const CreateAccount = () => {
       )}
       {currentDiv === 2 && (
         <div>
+          <Row>
+            <Col md={{ span: 3, offset: 8 }}>
+              <Alert key="success" variant="success">
+                {successMessage}
+              </Alert>
+            </Col>
+          </Row>
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -204,14 +265,7 @@ const CreateAccount = () => {
                     {t("One Time Password")} <br />
                     {email?.current?.value} {t("Please enter it below")}.
                   </p>
-                  {/* {inputs.map((input) => (
-                <Input
-                  key={input.id}
-                  {...input}
-                  value={values[input.name]}
-                  onChange={(e) => onChange(e)}
-                />
-              ))} */}
+
                   <div>
                     <label htmlFor="emailVal">Enter the OTP</label>
                     <div>
@@ -220,19 +274,20 @@ const CreateAccount = () => {
                         className="form-control"
                         ref={verifyEmailCode}
                       />
+                      <small id="smallErr">{errMessage}</small>
                     </div>
                   </div>
-                  <a
-                    href="#"
+                  <Button
                     class="myButton mb-3"
                     id="CreateAccountContinueButton"
+                    variant="warning"
+                    disabled={isButtonDisabled}
                     onClick={() => {
                       handleVerifyEmail();
-                      showDiv3();
                     }}
                   >
                     {t("Continue")}
-                  </a>
+                  </Button>
                   <div className="row text-center">
                     <Link>{t("Resend OTP")}</Link>
                   </div>
@@ -275,8 +330,8 @@ const CreateAccount = () => {
                 <p>Your Email is verified succefully</p>
                 <hr />
                 <p className="mb-0">
-                  if you want to go to home and products click{" "}
-                  <Link to={"/"}>Here</Link>
+                  Now Please sighIn again from
+                  <Link to={"/SignIn"}> Here</Link>
                 </p>
               </div>
             </div>

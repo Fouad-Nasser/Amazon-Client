@@ -204,45 +204,10 @@ const Order = () => {
                       </Pagination>
                     </div>
                   </div>
-                  {/* <Table striped bordered hover variant="warning">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>username</th>
-                        <th>total price</th>
-                        <th>address</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td colSpan={2}>Larry the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </Table> */}
                 </Row>
               </Tab>
               <Tab eventKey="buy" title={t("Buy Again")}>
-                <Row id="sentnceInOrder">
-                  <h6>
-                    {" "}
-                    {/* Looks like you haven't placed an order in the last 3 months.{" "}
-                    <Link>View orders in 2023</Link> */}
-                  </h6>
-                </Row>
+                <Row id="sentnceInOrder"></Row>
               </Tab>
               <Tab eventKey="Not-yet-Shipped" title={t("Not yet Shipped")}>
                 <h1></h1>

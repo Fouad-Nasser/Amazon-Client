@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Accordion, Button, Card } from "react-bootstrap";
+import { Accordion, Alert, Button, Card, Col, Row } from "react-bootstrap";
 import "./forgetPassword.css";
 import { useState } from "react";
 import axios from "axios";
@@ -13,9 +13,15 @@ const ForgetPassword = () => {
   const showDiv2 = () => setCurrentDiv(2);
   const showDiv3 = () => setCurrentDiv(3);
   const [emailVal, setEmailVal] = useState("");
+  const [errMessage, setErrMessage] = useState("");
+  const [errMessage2, setErrMessage2] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const handleSendOTP = () => {
+  const handleButtonClick1 = () => {
+    setIsButtonDisabled(true);
+    // make the API call here
     axios
       .post(
         "http://localhost:8000/users/forgot_password",
@@ -31,15 +37,30 @@ const ForgetPassword = () => {
       )
       .then((res) => {
         console.log(res.data);
-        alert("chechk your email");
+        setSuccessMessage("chechk the OTP on your email");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
 
+        setIsButtonDisabled(false);
+        showDiv2();
         // navigate("/OTP");
       })
       .catch((err) => {
         console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.message);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 3000);
       });
   };
-  const handleEntertheOTP = () => {
+  const handleButtonClick2 = () => {
+    setIsButtonDisabled(true);
+    // make the API call here
     axios
       .post(
         "http://localhost:8000/users/verify_reset_code",
@@ -56,15 +77,31 @@ const ForgetPassword = () => {
       )
       .then((res) => {
         console.log(res.data);
-        console.log(emailVal);
-        alert("valid OTP next enter the new Password");
+        setSuccessMessage("valid OTP next Enter the new Password");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
+
+        setIsButtonDisabled(false);
+        showDiv3();
         // navigate("/OTP");
       })
       .catch((err) => {
         console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.message);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 3000);
       });
   };
-  const handleEnterTheNewPassword = () => {
+
+  const handleButtonClick3 = () => {
+    setIsButtonDisabled(true);
+    // make the API call here
     axios
       .put(
         "http://localhost:8000/users/reset_password",
@@ -82,32 +119,54 @@ const ForgetPassword = () => {
       )
       .then((res) => {
         console.log(res.data);
-        alert("Password updated");
-
-        // navigate("/OTP");
+        setSuccessMessage("Password updated Succefully");
+        setTimeout(() => {
+          setSuccessMessage("");
+          navigate("/SignIn");
+        }, 3000);
+        setIsButtonDisabled(false);
       })
       .catch((err) => {
         console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.errors[1].msg);
+        setErrMessage2(err.response.data.errors[0].msg);
+        // setErrMessage(err.response.data.msg);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+          setErrMessage2("");
+        }, 3000);
       });
   };
-  const [values, setValues] = useState({
-    email: "",
-  });
-  const inputs = [
-    {
-      id: 1,
-      name: "email",
-      type: "text",
-      placeholder: "enter the email",
-      errorMessage: "It should be a valid email address!",
-      label: "Email or mobile phone number",
-      pattern: `/^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/`,
-      required: true,
-    },
-  ];
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const handleEnterTheNewPassword = () => {
+  //   axios
+  //     .put(
+  //       "http://localhost:8000/users/reset_password",
+  //       {
+  //         email: emailVal,
+  //         newPassword: newPassword.current.value,
+  //         confirmNewPassword: confirmNewPassword.current.value,
+  //       },
+  //       {
+  //         headers: {
+  //           "content-type": "application/json",
+  //           Authorization: localStorage.getItem("token"),
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       alert("Password updated");
+
+  //       // navigate("/OTP");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const email = useRef();
   const restCode = useRef();
   const newPassword = useRef();
@@ -116,6 +175,13 @@ const ForgetPassword = () => {
     <>
       {currentDiv === 1 && (
         <div>
+          <Row>
+            <Col md={{ span: 3, offset: 8 }}>
+              <Alert key="success" variant="success">
+                {successMessage}
+              </Alert>
+            </Col>
+          </Row>
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -148,18 +214,20 @@ const ForgetPassword = () => {
                     <div>
                       <input type="text" className="form-control" ref={email} />
                     </div>
+                    <small id="smallErr">{errMessage}</small>
                   </div>
-                  <button
+                  <Button
                     class="myButton mb-3"
                     id="CreateAccountContinueButton"
+                    variant="warning"
+                    disabled={isButtonDisabled}
                     onClick={() => {
-                      handleSendOTP();
-                      showDiv2();
                       setEmailVal(email.current.value);
+                      handleButtonClick1();
                     }}
                   >
                     {t("Continue")}
-                  </button>
+                  </Button>
                 </Card.Body>
               </Card>
               <h5 className="mt-3">{t("Has your email")}</h5>
@@ -176,6 +244,13 @@ const ForgetPassword = () => {
       )}
       {currentDiv === 2 && (
         <div>
+          <Row disabled>
+            <Col md={{ span: 3, offset: 8 }}>
+              <Alert key="success" variant="success">
+                {successMessage}
+              </Alert>
+            </Col>
+          </Row>
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -213,19 +288,20 @@ const ForgetPassword = () => {
                         className="form-control"
                         ref={restCode}
                       />
+                      <small id="smallErr">{errMessage}</small>
                     </div>
                   </div>
-                  <a
-                    href="#"
+                  <Button
                     class="myButton mb-3"
                     id="CreateAccountContinueButton"
+                    variant="warning"
+                    disabled={isButtonDisabled}
                     onClick={() => {
-                      handleEntertheOTP();
-                      showDiv3();
+                      handleButtonClick2();
                     }}
                   >
                     {t("Continue")}
-                  </a>
+                  </Button>
                   <div className="row text-center">
                     <Link>{t("Resend OTP")}</Link>
                   </div>
@@ -254,6 +330,13 @@ const ForgetPassword = () => {
       )}
       {currentDiv === 3 && (
         <div>
+          <Row disabled>
+            <Col md={{ span: 3, offset: 8 }}>
+              <Alert key="success" variant="success">
+                {successMessage}
+              </Alert>
+            </Col>
+          </Row>
           <div className="register">
             <img
               id="CreateAccountContinueImg2"
@@ -285,6 +368,7 @@ const ForgetPassword = () => {
                         className="form-control"
                         ref={newPassword}
                       />
+                      <small id="smallErr">{errMessage}</small>
                     </div>
                   </div>
                   <div>
@@ -295,16 +379,18 @@ const ForgetPassword = () => {
                         className="form-control"
                         ref={confirmNewPassword}
                       />
+                      <small id="smallErr">{errMessage2}</small>
                     </div>
                   </div>
-                  <a
-                    href="#"
+                  <Button
                     class="myButton mb-3"
                     id="CreateAccountContinueButton"
-                    onClick={handleEnterTheNewPassword}
+                    variant="warning"
+                    disabled={isButtonDisabled}
+                    onClick={handleButtonClick3}
                   >
                     {t("Continue")}
-                  </a>
+                  </Button>
                   <div className="row text-center">
                     <Link>{t("Remember ur pasword")}</Link>
                   </div>

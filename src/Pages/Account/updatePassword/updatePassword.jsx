@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Alert, Button, Card, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Alert, Button, Card, Col, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import "./updatePassword.css";
 import Input from "../../../Components/Input/Input";
 import axios from "axios";
@@ -13,7 +13,12 @@ const UpdatePasword = () => {
   });
   const [err, setErr] = useState(null);
   const { t, i18n } = useTranslation();
+  const [errMessage, setErrMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const navigate = useNavigate();
   const handleUpatePassword = () => {
+    setIsButtonDisabled(true);
     axios
       .put(
         "http://localhost:8000/users/change_password",
@@ -31,11 +36,24 @@ const UpdatePasword = () => {
       )
       .then((res) => {
         console.log(res.data);
-        alert("password updated succefully");
+        setSuccessMessage("Your Password is updated Succefully");
+        setTimeout(() => {
+          setSuccessMessage("");
+          navigate("/");
+        }, 3000);
+
+        setIsButtonDisabled(false);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
-        setErr(err.response.data.error);
+        console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.error);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 8000);
       });
   };
   const inputs = [
@@ -46,9 +64,7 @@ const UpdatePasword = () => {
       placeholder: "enter current password",
       errorMessage: "password must match your current password",
       label: "Current Password",
-      //   patter: `/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/`,
       required: true,
-      //   ref: { emailRef },
     },
     {
       id: 2,
@@ -77,6 +93,13 @@ const UpdatePasword = () => {
   };
   return (
     <>
+      <Row>
+        <Col md={{ span: 3, offset: 8 }}>
+          <Alert key="success" variant="success">
+            {successMessage}
+          </Alert>
+        </Col>
+      </Row>
       {/* <Alert key="danger" variant="danger">
         {err}
       </Alert> */}
@@ -110,11 +133,13 @@ const UpdatePasword = () => {
                 onChange={(e) => onChange(e)}
               />
             ))}
+            <small id="smallErr">{errMessage}</small>
             {/* <button onClick={togglePassword}>Show Password</button> */}
             <div id="opsn">
               <Button
                 variant="warning"
                 id="buttonUpdatePassword"
+                disabled={isButtonDisabled}
                 onClick={handleUpatePassword}
               >
                 {t("Save changes")}

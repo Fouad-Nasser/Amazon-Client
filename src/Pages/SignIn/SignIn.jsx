@@ -1,17 +1,22 @@
 import React, { useRef, useState } from "react";
-import { Col, Form, Toast } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row, Toast } from "react-bootstrap";
 import Input from "../../Components/Input/Input";
 import "./SignIn.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const SignIn = () => {
   const { t, i18n } = useTranslation();
   const emailRef = useRef(null);
   const passRef = useRef(null);
+  const [errMessage, setErrMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignIn = () => {
+    setIsButtonDisabled(true);
     axios
       .post(
         "http://localhost:8000/users/login",
@@ -29,6 +34,23 @@ const SignIn = () => {
         console.log(response);
         var Token = response.data.token;
         localStorage.setItem("token", Token);
+        setSuccessMessage("signed in succefully");
+        setTimeout(() => {
+          setSuccessMessage("");
+          navigate("/");
+        }, 3000);
+        setIsButtonDisabled(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsButtonDisabled(true);
+        setErrMessage(err.response.data.message);
+        setTimeout(() => {
+          setIsButtonDisabled(false);
+        }, 3000);
+        setTimeout(() => {
+          setErrMessage("");
+        }, 3000);
       });
   };
 
@@ -54,8 +76,7 @@ const SignIn = () => {
       name: "password",
       type: "password",
       placeholder: "Enter Password",
-      errorMessage:
-        "Password must be 8-20 characters and include at least 1 UpperCase letter, 1lowerCase letter, 1 number and 1 special character!",
+      errorMessage: "Password must be 8-20 character!",
       label: `Password `,
       pattern: `{8,}$`,
       // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).
@@ -76,6 +97,13 @@ const SignIn = () => {
   const [show, setShow] = useState(false);
   return (
     <div class="text-center">
+      <Row>
+        <Col md={{ span: 3, offset: 8 }}>
+          <Alert key="success" variant="success">
+            {successMessage}
+          </Alert>
+        </Col>
+      </Row>
       <div className="register">
         <img
           id="CreateAccountContinueImg2"
@@ -96,14 +124,16 @@ const SignIn = () => {
                   ref={input.ref}
                 />
               ))}
-              <a
-                href="#"
+              <small id="smallErr">{errMessage}</small>
+              <Button
                 class="myButton mb-3"
                 id="CreateAccountContinueButton"
+                variant="warning"
                 onClick={handleSignIn}
+                disabled={isButtonDisabled}
               >
                 {t("SignIn")}
-              </a>
+              </Button>
               <Col xs={6} id="Toast">
                 <Toast
                   onClose={() => setShow(false)}
